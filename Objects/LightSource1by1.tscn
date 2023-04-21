@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Images/LightObjects/IronLantern.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Objects/LightSource1by1.gd" type="Script" id=2]
+[ext_resource path="res://Images/Misc/lightsource.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 37.4548, 6.5658 )
+
+[node name="LightSource1by1" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Body"]
+position = Vector2( 0, -37 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+position = Vector2( 0, -37 )
+
+[node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2( 115, 199 )
+rotation = 0.558396
+shape = SubResource( 1 )
+
+[node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2( 188, 197 )
+rotation = -0.563789
+shape = SubResource( 1 )
+
+[node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2( 115, 156 )
+rotation = -0.554731
+shape = SubResource( 1 )
+
+[node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2( 181, 156 )
+rotation = 0.62798
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PoolVector2Array( 74, -9, 151, -44, 230, -9, 229, 151, 151, 196, 72, 151 )
+
+[node name="Light2D" type="Light2D" parent="Body"]
+position = Vector2( 148, 137 )
+scale = Vector2( 1.76172, 0.84375 )
+texture = ExtResource( 3 )
+texture_scale = 2.26
+shadow_enabled = true
+shadow_filter = 5
+shadow_filter_smooth = 50.0
+
+[node name="ScaleTween" type="Tween" parent="Body"]
+
+[node name="PosTween" type="Tween" parent="Body"]

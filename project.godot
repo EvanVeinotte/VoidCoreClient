@@ -1,0 +1,69 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "WorldObject",
+"language": "GDScript",
+"path": "res://Scripts/Classes/WorldObject.gd"
+} ]
+_global_script_class_icons={
+"WorldObject": ""
+}
+
+[application]
+
+config/name="VoidCore"
+run/main_scene="res://Scenes/Main.tscn"
+boot_splash/image="res://Images/Plants/orangepottedplant.png"
+boot_splash/fullsize=false
+config/icon="res://Images/Floors/tile.png"
+
+[autoload]
+
+Constants="*res://Scripts/Constants.gd"
+MouseController="*res://Scripts/MouseController.gd"
+LootTable="*res://Scripts/LootTable.gd"
+FileHandler="*res://Scripts/FileHandler.gd"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=960
+window/size/test_height=540
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+scrollup={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+scrolldown={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+environment/default_environment="res://default_env.tres"

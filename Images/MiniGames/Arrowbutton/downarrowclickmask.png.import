@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/downarrowclickmask.png-e3d379b8327a8c3ecb155d3945690d76.res"
+
+[deps]
+
+source_file="res://Images/MiniGames/Arrowbutton/downarrowclickmask.png"
+dest_files=[ "res://.import/downarrowclickmask.png-e3d379b8327a8c3ecb155d3945690d76.res" ]
+
+[params]
+
+create_from=0
+threshold=0.5

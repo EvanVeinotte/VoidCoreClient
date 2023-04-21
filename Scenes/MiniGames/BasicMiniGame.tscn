@@ -1,0 +1,253 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Images/MiniGames/ArcadeBg.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/MiniGames/Basic/BasicMiniGame.gd" type="Script" id=2]
+[ext_resource path="res://Images/MiniGames/BasicGame/playersheet.png" type="Texture" id=3]
+[ext_resource path="res://Images/MiniGames/gamescreenbg.png" type="Texture" id=4]
+[ext_resource path="res://Images/MiniGames/Arrowbutton/arrowbuttonnormal.png" type="Texture" id=5]
+[ext_resource path="res://Images/MiniGames/Arrowbutton/arrowbuttonpressed.png" type="Texture" id=6]
+[ext_resource path="res://Images/MiniGames/Arrowbutton/clickmask.png" type="BitMap" id=7]
+[ext_resource path="res://Images/MiniGames/Arrowbutton/downarrownormal.png" type="Texture" id=8]
+[ext_resource path="res://Images/MiniGames/Arrowbutton/downarrowpressed.png" type="Texture" id=9]
+[ext_resource path="res://Images/MiniGames/Arrowbutton/downarrowclickmask.png" type="BitMap" id=10]
+[ext_resource path="res://Scenes/MiniGames/Basic/Enemy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Images/MiniGames/Numberssheet.png" type="Texture" id=12]
+[ext_resource path="res://Images/MiniGames/Coinsfull.png" type="Texture" id=13]
+[ext_resource path="res://Images/MiniGames/gameover.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25, 70 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[node name="BasicMiniGame" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BG" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Screen" type="Node2D" parent="."]
+
+[node name="ScreenBG" type="Sprite" parent="Screen"]
+position = Vector2( 163, 135 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Player" type="Node2D" parent="Screen"]
+position = Vector2( 250, 510 )
+
+[node name="Sprite" type="Sprite" parent="Screen/Player"]
+scale = Vector2( 10, 10 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="Screen/Player"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Screen/Player/Area2D"]
+position = Vector2( 25, 80 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Screen/Player"]
+autoplay = "Idle"
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="Enemy1" parent="Screen" instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 1200, 260 )
+
+[node name="Enemy2" parent="Screen" instance=ExtResource( 11 )]
+visible = false
+
+[node name="Enemy3" parent="Screen" instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 1200, 740 )
+
+[node name="Score" type="Node2D" parent="Screen"]
+position = Vector2( 163, 135 )
+
+[node name="digit1" type="Sprite" parent="Screen/Score"]
+position = Vector2( 390, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit2" type="Sprite" parent="Screen/Score"]
+position = Vector2( 350, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit3" type="Sprite" parent="Screen/Score"]
+position = Vector2( 310, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit4" type="Sprite" parent="Screen/Score"]
+position = Vector2( 270, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit5" type="Sprite" parent="Screen/Score"]
+position = Vector2( 230, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="Highscore" type="Node2D" parent="Screen"]
+position = Vector2( 763, 135 )
+
+[node name="digit1" type="Sprite" parent="Screen/Highscore"]
+position = Vector2( 390, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit2" type="Sprite" parent="Screen/Highscore"]
+position = Vector2( 350, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit3" type="Sprite" parent="Screen/Highscore"]
+position = Vector2( 310, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit4" type="Sprite" parent="Screen/Highscore"]
+position = Vector2( 270, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit5" type="Sprite" parent="Screen/Highscore"]
+position = Vector2( 230, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="Coins" type="Node2D" parent="Screen"]
+position = Vector2( 873, 135 )
+
+[node name="digit1" type="Sprite" parent="Screen/Coins"]
+position = Vector2( 390, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit2" type="Sprite" parent="Screen/Coins"]
+position = Vector2( 350, 20 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 12 )
+centered = false
+hframes = 11
+frame = 10
+
+[node name="CoinsFull" type="Sprite" parent="Screen"]
+visible = false
+position = Vector2( 463, 755 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 13 )
+centered = false
+
+[node name="GameOver" type="Sprite" parent="Screen"]
+visible = false
+position = Vector2( 463, 525 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 14 )
+centered = false
+
+[node name="Buttons" type="Node2D" parent="."]
+modulate = Color( 0.317647, 0.317647, 0.317647, 1 )
+
+[node name="UpArrow" type="TextureButton" parent="Buttons"]
+margin_left = 1474.0
+margin_top = 104.0
+margin_right = 1874.0
+margin_bottom = 504.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_click_mask = ExtResource( 7 )
+expand = true
+
+[node name="DownArrow" type="TextureButton" parent="Buttons"]
+margin_left = 1477.0
+margin_top = 420.0
+margin_right = 1877.0
+margin_bottom = 820.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_click_mask = ExtResource( 10 )
+expand = true
+
+[node name="RestartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BlinkTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Screen/Player/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="button_down" from="Buttons/UpArrow" to="." method="_on_UpArrow_button_down"]
+[connection signal="button_down" from="Buttons/DownArrow" to="." method="_on_DownArrow_button_down"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]
