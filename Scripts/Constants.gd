@@ -6,7 +6,7 @@ var SCREEN_SIZE = Vector2.ZERO
 const WORLD_X_OFFSET = Vector2(TILE_WIDTH/2, TILE_HEIGHT/2)
 const WORLD_Y_OFFSET = Vector2(-TILE_WIDTH/2, TILE_HEIGHT/2)
 const WORLD_Z_OFFSET = Vector2(0, -TILE_HEIGHT/2)
-const HOLD_UNTIL_WALK = 0.1
+const HOLD_UNTIL_WALK = 0.15
 const WALK_SPEED = 16000
 const MAP_SIZE = Vector3(16,16,3)
 const FLOOR_BOTTOM_COLLIDER_Y = 60
@@ -16,7 +16,7 @@ const WIDTH_IT_SHOULD_BE = 1920
 const HEIGHT_IT_SHOULD_BE = 1080
 
 const CAMERA_ZOOM_MAX = 4
-const CAMERA_ZOOM_MIN = 0.2
+const CAMERA_ZOOM_MIN = 0.5
 
 const COIN_STACK_LIMIT = 5
 const COIN_LYING_HEIGHT = 21
@@ -26,13 +26,31 @@ const SPAWN_IN_SPEED = 3000
 const GAME_WINDOW_TIME = 1
 const ESSENCE_SPAWN_DELAY = 0.5
 
-var inworld = true
+const SPEECH_BOX_LETTER_SPEED = 0.1
+const SPEECH_BOX_SPEED = 2
+
+const PLAYER_FALL_SPEED = 20
+
+var inworld = false
+var newworld
+var worlddata
+
+var DEVICE_TYPE
+
+func checkIfNewWorld():
+	newworld = worlddata.newworld
+	if(SettingsMenu.settingsdata.tutorialenabled):
+		inworld = !newworld
+	else:
+		inworld = true
 
 func _ready():
 	SCREEN_SIZE = get_viewport().size
 	get_tree().get_root().connect("size_changed", self, "sizeChanged")
 	if(OS.get_name() != "Android"):
 		SCREEN_SIZE *= 2
+	
+	DEVICE_TYPE = OS.get_name()
 	
 	print(getEncodedValue(3, 6, 3))
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/step1.mp3-7adf06d4512926a1c0660d00c0a9aae2.mp3str"
+
+[deps]
+
+source_file="res://Audio/WorldSFX/step1.mp3"
+dest_files=[ "res://.import/step1.mp3-7adf06d4512926a1c0660d00c0a9aae2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

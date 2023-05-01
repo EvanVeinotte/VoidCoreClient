@@ -1,6 +1,9 @@
 extends WorldObject
 
-const listofskins = [null, "res://Images/Plants/purplepottedplant.png","res://Images/Plants/orangepottedplant.png"]
+const listofskins = [null, "res://Images/Plants/purplepottedplant.png","res://Images/Plants/orangepottedplant.png",
+							"res://Images/Rocks/Rocks1.png"]
+
+onready var listofclickmasks = get_node("Body/Area2D").get_children()
 
 func setSouthCol(whattosetto):
 	get_node("Body/StaticBody2D/southcol").disabled = false
@@ -25,4 +28,6 @@ func setObject(newobjectid):
 	objectid = newobjectid
 	if(objectid < len(listofskins) and objectid > 0):
 		get_node("Body/Sprite").flip_h = bool(isrotated)
+		if(get_node("Body/Sprite").hframes == 2):
+			get_node("Body/Sprite").frame = int(isrotated)
 		get_node("Body/Sprite").texture = load(listofskins[objectid])

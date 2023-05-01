@@ -1,11 +1,180 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/CameraController.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/Kogo_font_v1-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/MiniGame.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Misc/AllSounds.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Themes/MenuTheme.tres" type="Theme" id=15]
+[ext_resource path="res://Scripts/Menus/PauseMenu.gd" type="Script" id=16]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "CineCome"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TopCinePanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TopCinePanel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BotCinePanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BotCinePanel:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1e-05 ), Vector2( 1, -1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "CineGone"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TopCinePanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TopCinePanel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BotCinePanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BotCinePanel:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TopCinePanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TopCinePanel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BotCinePanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BotCinePanel:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
@@ -18,10 +187,103 @@ script = ExtResource( 5 )
 [node name="FloorYSort" type="YSort" parent="World/YSort"]
 
 [node name="Player" parent="World/YSort" instance=ExtResource( 1 )]
-position = Vector2( 0, 1200 )
+position = Vector2( 150, 1300 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.533333, 0.533333, 0.533333, 1 )
+color = Color( 0.639216, 0.639216, 0.639216, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopCinePanel" type="Panel" parent="CanvasLayer"]
+visible = false
+margin_left = -22.0
+margin_top = -20.0
+margin_right = 1957.0
+margin_bottom = 200.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="BotCinePanel" type="Panel" parent="CanvasLayer"]
+visible = false
+margin_left = -33.0
+margin_top = 1100.0
+margin_right = 1946.0
+margin_bottom = 1320.0
+rect_scale = Vector2( 1, -1 )
+custom_styles/panel = SubResource( 4 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 71.0
+margin_top = 61.0
+margin_right = 190.0
+margin_bottom = 134.0
+theme = SubResource( 2 )
+text = "Hello"
+
+[node name="SaveLabel" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 4.0
+margin_top = 1000.0
+margin_right = 338.0
+margin_bottom = 1073.0
+theme = SubResource( 2 )
+text = "World Saved"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+anims/CineCome = SubResource( 7 )
+anims/CineGone = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
+[node name="DisplayLabelTween" type="Tween" parent="CanvasLayer"]
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 15 )
+script = ExtResource( 16 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="MenuOptions" type="Control" parent="CanvasLayer/PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ReturnButton" type="Button" parent="CanvasLayer/PauseMenu/MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 22.0
+margin_right = 193.0
+margin_bottom = 102.0
+text = "Return"
+
+[node name="SettingsBut" type="Button" parent="CanvasLayer/PauseMenu/MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 122.0
+margin_right = 193.0
+margin_bottom = 215.0
+text = "Settings"
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/PauseMenu/MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 221.0
+margin_right = 193.0
+margin_bottom = 314.0
+text = "Main Menu"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -30,16 +292,8 @@ script = ExtResource( 2 )
 
 [node name="MiniGame" parent="Camera2D" instance=ExtResource( 6 )]
 
-[node name="Icon" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 4 )
+[node name="AllSounds" parent="." instance=ExtResource( 7 )]
 
-[node name="Icon2" type="Sprite" parent="."]
-visible = false
-position = Vector2( 960, 0 )
-texture = ExtResource( 4 )
-
-[node name="Icon3" type="Sprite" parent="."]
-visible = false
-position = Vector2( 480, 0 )
-texture = ExtResource( 4 )
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MenuOptions/ReturnButton" to="CanvasLayer/PauseMenu" method="_on_ReturnButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MenuOptions/SettingsBut" to="CanvasLayer/PauseMenu" method="_on_SettingsBut_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MenuOptions/MainMenuButton" to="CanvasLayer/PauseMenu" method="_on_MainMenuButton_pressed"]

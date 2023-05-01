@@ -1,16 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Images/TheVoidCore/newwhitespinner.png" type="Texture" id=1]
 [ext_resource path="res://Images/Floors/tile.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/TheVoidCore.gd" type="Script" id=3]
 [ext_resource path="res://Images/TheVoidCore/theshadow.png" type="Texture" id=4]
 [ext_resource path="res://Images/TheVoidCore/thecircle.png" type="Texture" id=5]
+[ext_resource path="res://Images/TheVoidCore/thecirclehighlight.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Misc/SpeechBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/Misc/VoidCoreScript.gd" type="Script" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 70.2136, 6.5658 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Idle"
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 143.106
+height = 221.882
+
+[sub_resource type="Animation" id=8]
 length = 3.6
 loop = true
 tracks/0/type = "value"
@@ -74,7 +80,7 @@ tracks/4/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/TheBall/WhiteSpinner/Sprite1:frame")
@@ -134,8 +140,16 @@ scale = Vector2( 0.75, 0.75 )
 z_index = 10
 texture = ExtResource( 5 )
 centered = false
+script = ExtResource( 8 )
 
 [node name="Highlighter" type="Sprite" parent="Body/TheBall"]
+visible = false
+show_behind_parent = true
+position = Vector2( 400, 450 )
+texture = ExtResource( 6 )
+
+[node name="Hungry" type="Sprite" parent="Body/TheBall"]
+show_behind_parent = true
 position = Vector2( 400, 450 )
 texture = ExtResource( 5 )
 
@@ -162,27 +176,31 @@ texture = ExtResource( 1 )
 hframes = 6
 frame = 5
 
+[node name="SpeechBox" parent="Body/TheBall" instance=ExtResource( 7 )]
+margin_top = -286.667
+margin_bottom = 1.33286
+
 [node name="StaticBody2D" type="StaticBody2D" parent="Body"]
 
 [node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
 position = Vector2( 73, 119 )
 rotation = 0.464258
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
 position = Vector2( 226, 120 )
 rotation = -0.464258
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
 position = Vector2( 71.5377, 32.0707 )
 rotation = -0.464258
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
 position = Vector2( 228, 32 )
 rotation = 0.464258
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Body"]
 
@@ -193,7 +211,18 @@ polygon = PoolVector2Array( -12, -26, -101, -189, -45, -364, 145, -468, 352, -38
 
 [node name="PosTween" type="Tween" parent="Body"]
 
+[node name="PlayerSensor" type="Area2D" parent="Body"]
+position = Vector2( 151, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/PlayerSensor"]
+position = Vector2( -3, 113 )
+rotation = 1.56995
+shape = SubResource( 10 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Idle = SubResource( 2 )
-anims/RESET = SubResource( 3 )
+anims/Idle = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[connection signal="body_entered" from="Body/PlayerSensor" to="." method="_on_PlayerSensor_body_entered"]
+[connection signal="body_exited" from="Body/PlayerSensor" to="." method="_on_PlayerSensor_body_exited"]

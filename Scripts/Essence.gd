@@ -26,6 +26,7 @@ func setCollidersBottom(settobottom):
 
 func beSelected():
 	if(stackstate == 1):
+		playPickupSound()
 		get_node("Body/EssenceSprite").frame = 0
 		myworld.themap[lastworldpos.z][lastworldpos.y][lastworldpos.x] = 0
 		myworld.referencemap[lastworldpos.z][lastworldpos.y][lastworldpos.x] = 0
@@ -35,7 +36,7 @@ func beSelected():
 	else:
 		stackstate = stackstate - 1
 		#have to keep the map updated with it's stackstate
-		myworld.themap[worldpos.z][worldpos.y][worldpos.x] = Constants.encodeForMap(objecttypeid, objectid, stackstate)
+		myworld.themap[worldpos.z][worldpos.y][worldpos.x] = Constants.encodeForMap(objecttypeid, objectid, int(isrotated), stackstate)
 		var newessenceobject = essenceobject.instance()
 		newessenceobject.settobeselectedonready = true
 		newessenceobject.stacktoupdate = self
@@ -44,13 +45,14 @@ func beSelected():
 		
 
 func beDeselected():
+	
 	if(MouseController.thevoidcore.checkPointInside(get_node("Body/EssenceSprite").position + position)):
 		MouseController.thevoidcore.get_node("Body/TheBall/Highlighter").scale = Vector2(1,1)
 		MouseController.thevoidcore.updateEssence(MouseController.thevoidcore.howmuchessence + 1)
 		self.queue_free()
 	
 	else:
-	
+		playPlaceSound()
 		if(!canplace and originstack):
 			originstack.setStackState(originstack.stackstate + 1)
 			self.queue_free()
@@ -64,6 +66,12 @@ func beDeselected():
 		else:
 			lasthoveredover.setStackState(lasthoveredover.stackstate + 1)
 			self.queue_free()
+
+func playPlaceSound():
+	SoundHandler.playSFX("coinclink")
+
+func playPickupSound():
+	SoundHandler.playSFX("coinclink")
 
 func _ready():
 	objecttypeid = 5
@@ -89,6 +97,8 @@ func setStackState(newstate):
 	newpoly[1] = Vector2(newpoly[1].x, 109 - (stackstate-1) * Constants.COIN_LYING_HEIGHT)
 	newpoly[2] = Vector2(newpoly[2].x, 109 - (stackstate-1) * Constants.COIN_LYING_HEIGHT)
 	get_node("Body/Area2D/CollisionPolygon2D").polygon = newpoly
+	myworld.themap[worldpos.z][worldpos.y][worldpos.x] = Constants.encodeForMap(objecttypeid, objectid, int(isrotated), stackstate)
+	FileHandler.saveWorldToFile(myworld)
 
 func canBeStackedMore():
 	return !(stackstate >= Constants.COIN_STACK_LIMIT)
@@ -105,10 +115,10 @@ func _process(_delta):
 	if(selected):
 		
 		if(MouseController.thevoidcore.checkPointInside(get_node("Body/EssenceSprite").position + position)):
-			MouseController.thevoidcore.get_node("Body/TheBall/Highlighter").scale = Vector2(1.25,1.25)
+			MouseController.thevoidcore.get_node("Body/TheBall/Hungry").scale = Vector2(1.25,1.25)
 			mybody.z_index = 999
 		else:
-			MouseController.thevoidcore.get_node("Body/TheBall/Highlighter").scale = Vector2(1,1)
+			MouseController.thevoidcore.get_node("Body/TheBall/Hungry").scale = Vector2(1,1)
 			mybody.z_index = 0
 		
 		if(stacktoupdate):
@@ -125,6 +135,9 @@ func _process(_delta):
 		else:
 			worldpos = Vector3(newworldpos.x, newworldpos.y, zstacklevel)
 			get_node("Body").modulate = Color(1,1,1)
+		
+		if(worldpos == player.worldpos):
+			canplace = false
 		
 		if(newworldpos.x < 0 or newworldpos.y < 0 or newworldpos.x > Constants.MAP_SIZE.x or newworldpos.y > Constants.MAP_SIZE.y):
 			get_node("Body").modulate = Color(1,0,0)

@@ -34,7 +34,11 @@ var savedcoins = 0
 var totalcoins = 0
 
 func _ready():
-	highscore = int(FileHandler.loadHighscoresFromFile()[minigamename])
+	var highscoredata = FileHandler.loadHighscoresFromFile()
+	if(highscoredata):
+		highscore = int(highscoredata[minigamename])
+	else: 
+		highscore = 0
 	displayHighscore()
 	randomize()
 
@@ -47,6 +51,7 @@ func restart():
 	score = 0
 	displayScore()
 	displayHighscore()
+	playerposindex = 1
 	player.position = Vector2(250,510)
 	howmanyenemiesactive = 0
 	gameover = false
@@ -65,6 +70,7 @@ func saveScoreIfHighscore(score):
 
 func displayHighscore():
 	if(newhighscore):
+		SoundHandler.playSFX("win")
 		get_node("BlinkTimer").start(0.5)
 	var digits = get_node("Screen/Highscore").get_children()
 	for i in range(5):
@@ -112,8 +118,10 @@ func _on_UpArrow_button_down():
 		if(playerposindex > 0):
 			playerposindex -= 1
 		player.position = Vector2(player.position.x, playerposes[playerposindex])
+		SoundHandler.playSFX("normalboop")
 	else:
 		if(canrestart and coinsfullnode.visible == false):
+			SoundHandler.playSFX("normalboop")
 			restart()
 
 func _on_DownArrow_button_down():
@@ -121,13 +129,16 @@ func _on_DownArrow_button_down():
 		if(playerposindex < 2):
 			playerposindex += 1
 		player.position = Vector2(player.position.x, playerposes[playerposindex])
+		SoundHandler.playSFX("normalboop")
 	else:
 		if(canrestart and coinsfullnode.visible == false):
+			SoundHandler.playSFX("normalboop")
 			restart()
 
 
 func _on_Area2D_area_entered(area):
 	get_node("RestartTimer").start(1)
+	SoundHandler.playSFX("error")
 	gameover = true
 	canrestart = false
 	savedcoins = totalcoins
@@ -142,6 +153,12 @@ func _on_Area2D_area_entered(area):
 	saveScoreIfHighscore(score)
 	displayHighscore()
 
+func _input(event):
+	if(event is InputEventKey):
+		if(event.pressed and event.as_text() == "Up"):
+			_on_UpArrow_button_down()
+		elif(event.pressed and event.as_text() == "Down"):
+			_on_DownArrow_button_down()
 
 func _on_RestartTimer_timeout():
 	canrestart = true

@@ -1,7 +1,9 @@
 extends WorldObject
 
 const listofskins = [null, "res://Images/Floors/tile.png","res://Images/Floors/cobbletile.png",
-					"res://Images/Floors/dirttile.png", "res://Images/Floors/grasstile.png"]
+					"res://Images/Floors/dirttile.png", "res://Images/Floors/grasstile.png",
+					"res://Images/Floors/grassandpinktile.png", "res://Images/Floors/grassandyellowtile.png",
+					"res://Images/Floors/grassandorangetile.png"]
 
 func _ready():
 	objecttypeid = 1

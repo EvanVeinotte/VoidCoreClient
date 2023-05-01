@@ -2,15 +2,23 @@ extends Node2D
 
 onready var player = get_tree().get_root().get_node("Main/World/YSort/Player")
 onready var floorysort = get_node("YSort/FloorYSort")
+
 onready var floorobject = preload("res://Objects/FloorTile.tscn")
-onready var onebyonenostackobject = preload("res://Objects/1by1nostack.tscn")
+onready var pottedflower = preload("res://Objects/PottedFlower.tscn")
 onready var lightsource1by1 = preload("res://Objects/LightSource1by1.tscn")
 onready var thevoidcore = preload("res://Scenes/TheVoidCore.tscn")
 onready var essence = preload("res://Scenes/Essence.tscn")
 onready var gamemachine = preload("res://Objects/GameMachine.tscn")
+onready var rocks = preload("res://Objects/Rocks.tscn")
+onready var stools = preload("res://Objects/Stools.tscn")
 
-onready var objecttypeids = [null, floorobject, onebyonenostackobject, lightsource1by1, thevoidcore,
-							essence, gamemachine]
+onready var objecttypeids = [null, floorobject, pottedflower, lightsource1by1, thevoidcore,
+							essence, gamemachine, rocks, stools]
+
+var worlddata
+var newworld = false
+
+var firstlootarray
 
 #3-0 = object type id
 #7-3 = object id
@@ -73,7 +81,7 @@ var themap = [
 			]
 
 func _ready():
-	themap = FileHandler.loadWorldFromFile()
+	worlddata = Constants.worlddata
 	for z in range(Constants.MAP_SIZE.z):
 		referencemap.append([])
 		for y in range(Constants.MAP_SIZE.y):
@@ -84,6 +92,10 @@ func _ready():
 	loadFloorsFromMap()
 
 func loadFloorsFromMap():
+	LootTable.firstlootarray = worlddata.firstlootarray
+	firstlootarray = LootTable.firstlootarray
+	themap = worlddata.themap
+	player.position = Vector2(worlddata.player.position.x, worlddata.player.position.y)
 	for z in range(Constants.MAP_SIZE.z):
 		for y in range(Constants.MAP_SIZE.y):
 			for x in range(Constants.MAP_SIZE.x):
@@ -117,6 +129,7 @@ func instantiateNewObject(placepos, objecttypeid, objectid, extradata, isrotated
 		processFloorColliders(newobject)
 		updateAdjacentObjects(placepos)
 	
+	FileHandler.saveWorldToFile(self)
 
 func updateAdjacentObjects(thispos):
 	var adjacentobjects = getAdjacentObjects(thispos)
@@ -141,13 +154,15 @@ func checkIfPlaceablePos(thepos):
 		if(checkIfWithinWorldMap(Vector3(thepos.x, thepos.y, z))):
 			if(referencemap[z][thepos.y][thepos.x]):
 				if(referencemap[z][thepos.y][thepos.x].isplaceableon):
-					return Vector3(thepos.x, thepos.y, z + 1)
+					print(Vector3(thepos.x, thepos.y, z + 1), player.worldpos)
+					if(Vector3(thepos.x, thepos.y, z + 1) != player.worldpos):
+						return Vector3(thepos.x, thepos.y, z + 1)
 				else:
 					break
 	return false
 
 func getPlaceableWorldPosRing(startpos):
-	
+	player.updateWorldPos()
 	var foundposition = false
 	var ring = 0
 	
@@ -211,7 +226,6 @@ func newObjectPlaced(thisobject, sendback=false):
 		if(checkIfWithinWorldMap(thisobject.worldpos)):
 			var extradata = 0
 			if(thisobject.objecttypeid == 5):
-				print("hello")
 				extradata = thisobject.stackstate
 			var encodedvalue = Constants.encodeForMap(thisobject.objecttypeid, thisobject.objectid, int(thisobject.isrotated), extradata)
 			themap[thisobject.worldpos.z][thisobject.worldpos.y][thisobject.worldpos.x] = encodedvalue
@@ -224,6 +238,9 @@ func newObjectPlaced(thisobject, sendback=false):
 			thisobject.worldpos = Vector3(thisobject.lastworldpos.x, thisobject.lastworldpos.y, thisobject.lastworldpos.z)
 			themap[thisobject.lastworldpos.z][thisobject.lastworldpos.y][thisobject.lastworldpos.x] = thisobject.objectid
 			thisobject.calculateposition(thisobject.worldpos)
+		
+		FileHandler.saveWorldToFile(self)
+		
 	else:
 		thisobject.worldpos = Vector3(thisobject.lastworldpos.x, thisobject.lastworldpos.y, thisobject.lastworldpos.z)
 		themap[thisobject.lastworldpos.z][thisobject.lastworldpos.y][thisobject.lastworldpos.x] = thisobject.objectid

@@ -52,18 +52,21 @@ func doActiveAction():
 	pass
 
 func beRotated(settovalue=null):
+
 	if(canrotate):
 		if(settovalue):
 			get_node("Body/Sprite").flip_h = bool(settovalue)
 			isrotated = bool(settovalue)
-			myworld.newObjectPlaced(self)
 		else:
 			get_node("Body/Sprite").flip_h = !get_node("Body/Sprite").flip_h
 			isrotated = get_node("Body/Sprite").flip_h
-			myworld.newObjectPlaced(self)
+		if(get_node("Body/Sprite").hframes == 2):
+			get_node("Body/Sprite").frame = int(isrotated)
+		myworld.newObjectPlaced(self)
 
 func beSelected():
 	get_node("Body").modulate = Color(0,1,0)
+	playPickupSound()
 	myworld.themap[lastworldpos.z][lastworldpos.y][lastworldpos.x] = 0
 	myworld.referencemap[lastworldpos.z][lastworldpos.y][lastworldpos.x] = 0
 	myworld.objectPickedUp(self)
@@ -72,8 +75,15 @@ func beSelected():
 
 func beDeselected():
 	get_node("Body").modulate = Color(1,1,1)
+	playPlaceSound()
 	selected = false
 	myworld.newObjectPlaced(self, !canplace)
+
+func playPlaceSound():
+	SoundHandler.playSFX("place")
+
+func playPickupSound():
+	SoundHandler.playSFX("pickup")
 
 func setLastWorldPos():
 	lastworldpos = worldpos
@@ -108,6 +118,7 @@ func doSpawnIn():
 	postween.start()
 
 func _onPosTweenEnd():
+	playPlaceSound()
 	calculateposition(worldpos)
 
 func _ready():
@@ -140,6 +151,9 @@ func _process(_delta):
 				canplace = true
 		else:
 			canplace = true
+		
+		if(worldpos == player.worldpos):
+			canplace = false
 		
 		if(newworldpos.x < 0 or newworldpos.y < 0 or newworldpos.x > Constants.MAP_SIZE.x or newworldpos.y > Constants.MAP_SIZE.y):
 			get_node("Body").modulate = Color(1,0,0)

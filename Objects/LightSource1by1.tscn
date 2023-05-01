@@ -5,7 +5,7 @@
 [ext_resource path="res://Images/Misc/lightsource.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 37.4548, 6.5658 )
+extents = Vector2( 25.402, 6.5658 )
 
 [node name="LightSource1by1" type="Node2D"]
 script = ExtResource( 2 )
@@ -22,29 +22,30 @@ centered = false
 position = Vector2( 0, -37 )
 
 [node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
-position = Vector2( 115, 199 )
+position = Vector2( 128, 204 )
 rotation = 0.558396
 shape = SubResource( 1 )
 
 [node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
-position = Vector2( 188, 197 )
+position = Vector2( 177.813, 203.441 )
 rotation = -0.563789
 shape = SubResource( 1 )
 
 [node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
-position = Vector2( 115, 156 )
+position = Vector2( 128, 173 )
 rotation = -0.554731
 shape = SubResource( 1 )
 
 [node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
-position = Vector2( 181, 156 )
+position = Vector2( 172, 173 )
 rotation = 0.62798
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="Body"]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
-polygon = PoolVector2Array( 74, -9, 151, -44, 230, -9, 229, 151, 151, 196, 72, 151 )
+polygon = PoolVector2Array( 100, 58, 158, 26, 197, 45, 205, 167, 151, 196, 105, 170 )
 
 [node name="Light2D" type="Light2D" parent="Body"]
 position = Vector2( 148, 137 )

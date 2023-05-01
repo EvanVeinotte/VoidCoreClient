@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/voidspeech.mp3-33942eba6c67832e2935cd5e0d8a1831.mp3str"
+
+[deps]
+
+source_file="res://Audio/WorldSFX/voidspeech.mp3"
+dest_files=[ "res://.import/voidspeech.mp3-33942eba6c67832e2935cd5e0d8a1831.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

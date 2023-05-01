@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/voidoutput.mp3-0bb4d64d315ec7cff402fd892143bd6b.mp3str"
+
+[deps]
+
+source_file="res://Audio/WorldSFX/voidoutput.mp3"
+dest_files=[ "res://.import/voidoutput.mp3-0bb4d64d315ec7cff402fd892143bd6b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

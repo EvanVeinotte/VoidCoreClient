@@ -1,0 +1,361 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/Menus/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Images/Player/playerspritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Images/Menu/LogoVoid.png" type="Texture" id=3]
+[ext_resource path="res://Images/Menu/LogoCore.png" type="Texture" id=4]
+[ext_resource path="res://Themes/MenuTheme.tres" type="Theme" id=5]
+[ext_resource path="res://Audio/WorldSFX/voidoutput.mp3" type="AudioStream" id=6]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "MenuNormal"
+length = 3.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("LogoVoid:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 476, 266 ), Vector2( 476, 338 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LogoCore:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1427, 268 ), Vector2( 1427, 338 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LogoVoid:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 433, 266 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LogoCore:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1463, 268 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LogoVoid:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 433, 266 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LogoCore:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1463, 268 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "normal"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="LogoCore" type="Sprite" parent="."]
+position = Vector2( 1463, 268 )
+texture = ExtResource( 4 )
+
+[node name="LogoVoid" type="Sprite" parent="."]
+position = Vector2( 433, 266 )
+texture = ExtResource( 3 )
+
+[node name="Player" type="Sprite" parent="."]
+position = Vector2( 922, 312 )
+texture = ExtResource( 2 )
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "MenuNormal"
+playback_speed = 0.4
+anims/MenuNormal = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="PlayerAnimator" type="AnimationPlayer" parent="."]
+autoplay = "normal"
+anims/RESET = SubResource( 3 )
+anims/normal = SubResource( 4 )
+
+[node name="MenuOptions" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PlayButton" type="Button" parent="MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 22.0
+margin_right = 193.0
+margin_bottom = 102.0
+text = "Play"
+
+[node name="MultiplayerButton" type="Button" parent="MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 122.0
+margin_right = 193.0
+margin_bottom = 202.0
+text = "Multiplayer"
+
+[node name="DimensionsButton" type="Button" parent="MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 217.0
+margin_right = 193.0
+margin_bottom = 297.0
+text = "Dimensions"
+
+[node name="SettingsBut" type="Button" parent="MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 308.0
+margin_right = 193.0
+margin_bottom = 388.0
+text = "Settings"
+
+[node name="ExitGameButton" type="Button" parent="MenuOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 399.0
+margin_right = 193.0
+margin_bottom = 479.0
+text = "Exit"
+
+[node name="ComingSoon" type="Label" parent="MenuOptions"]
+visible = false
+margin_left = 22.0
+margin_top = 979.0
+margin_right = 379.0
+margin_bottom = 1052.0
+text = "Coming Soon!"
+
+[node name="PlayOptions" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PlayWorldButton" type="Button" parent="PlayOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 22.0
+margin_right = 193.0
+margin_bottom = 102.0
+text = "Load World"
+
+[node name="DeleteWorldButton" type="Button" parent="PlayOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 122.0
+margin_right = 193.0
+margin_bottom = 202.0
+text = "Delete World"
+
+[node name="BackButton" type="Button" parent="PlayOptions"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 399.0
+margin_right = 193.0
+margin_bottom = 479.0
+text = "Back"
+
+[node name="CreditsScreen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="CreditsScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="Programming" type="Label" parent="CreditsScreen"]
+margin_left = 47.0
+margin_top = 36.0
+margin_right = 434.0
+margin_bottom = 185.0
+text = "Programming:
+Evan Veinotte"
+
+[node name="Art" type="Label" parent="CreditsScreen"]
+margin_left = 47.0
+margin_top = 265.0
+margin_right = 434.0
+margin_bottom = 414.0
+text = "Art:
+Evan Veinotte"
+
+[node name="Music and Audio" type="Label" parent="CreditsScreen"]
+margin_left = 47.0
+margin_top = 500.0
+margin_right = 434.0
+margin_bottom = 649.0
+text = "Music and Audio:
+Evan Veinotte
+"
+
+[node name="SocialMedia" type="Label" parent="CreditsScreen"]
+margin_left = 40.0
+margin_top = 742.0
+margin_right = 929.0
+margin_bottom = 967.0
+text = "Social Media Management:
+Emily Langlais"
+
+[node name="Patrons" type="Label" parent="CreditsScreen"]
+margin_left = 1165.0
+margin_top = 36.0
+margin_right = 1864.0
+margin_bottom = 261.0
+text = "Patrons:
+-"
+
+[node name="BackButton" type="Button" parent="CreditsScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = 399.0
+margin_right = 193.0
+margin_bottom = 479.0
+text = "Back"
+
+[node name="LoadingScreen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="LoadingScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="Programming" type="Label" parent="LoadingScreen"]
+margin_left = 56.0
+margin_top = 981.0
+margin_right = 443.0
+margin_bottom = 1062.0
+text = "Loading..."
+
+[node name="ShowComingSoonTween" type="Tween" parent="."]
+
+[node name="LoadingScreenTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="pressed" from="MenuOptions/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MenuOptions/MultiplayerButton" to="." method="_on_MultiplayerButton_pressed"]
+[connection signal="pressed" from="MenuOptions/DimensionsButton" to="." method="_on_DimensionsButton_pressed"]
+[connection signal="pressed" from="MenuOptions/SettingsBut" to="." method="_on_SettingsBut_pressed"]
+[connection signal="pressed" from="MenuOptions/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]
+[connection signal="pressed" from="PlayOptions/PlayWorldButton" to="." method="_on_PlayWorldButton_pressed"]
+[connection signal="pressed" from="PlayOptions/DeleteWorldButton" to="." method="_on_DeleteWorldButton_pressed"]
+[connection signal="pressed" from="PlayOptions/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="CreditsScreen/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="timeout" from="LoadingScreenTimer" to="." method="_on_LoadingScreenTimer_timeout"]

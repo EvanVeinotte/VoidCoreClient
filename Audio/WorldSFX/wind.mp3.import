@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wind.mp3-7e0c539b9c428d9c26115c9bc3be14b8.mp3str"
+
+[deps]
+
+source_file="res://Audio/WorldSFX/wind.mp3"
+dest_files=[ "res://.import/wind.mp3-7e0c539b9c428d9c26115c9bc3be14b8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

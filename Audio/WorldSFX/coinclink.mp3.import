@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/coinclink.mp3-25ac65cc8310d5f4ce164265326cef3e.mp3str"
+
+[deps]
+
+source_file="res://Audio/WorldSFX/coinclink.mp3"
+dest_files=[ "res://.import/coinclink.mp3-25ac65cc8310d5f4ce164265326cef3e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
