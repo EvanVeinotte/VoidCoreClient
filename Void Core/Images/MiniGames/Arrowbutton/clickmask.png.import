@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://bj7ldwaaq36fd"
+path="res://.godot/imported/clickmask.png-56cd7ea3d7be6f2a775e3845a315d93c.res"
+
+[deps]
+
+source_file="res://Images/MiniGames/Arrowbutton/clickmask.png"
+dest_files=["res://.godot/imported/clickmask.png-56cd7ea3d7be6f2a775e3845a315d93c.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

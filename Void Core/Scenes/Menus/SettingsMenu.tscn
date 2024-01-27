@@ -1,0 +1,341 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxp6bd7qdmvcq"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/Settings.gd" id="1"]
+[ext_resource type="Theme" uid="uid://bts5qatdw76fe" path="res://Themes/MenuTheme.tres" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pexl"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0wrw"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lgc6"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 0
+script = ExtResource("1")
+
+[node name="SettingsMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+theme = ExtResource("2")
+
+[node name="Panel" type="Panel" parent="SettingsMenu"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pexl")
+
+[node name="BackButton" type="Button" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = 329.0
+offset_right = 271.0
+offset_bottom = 422.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+
+[node name="FullscreenButton" type="Button" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -266.0
+offset_right = 271.0
+offset_bottom = -173.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fullscreen: Off"
+
+[node name="MuteButton" type="Button" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.5
+offset_top = -169.0
+offset_right = 271.5
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Muted: Yes"
+
+[node name="TutorialButton" type="Button" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -72.0
+offset_right = 271.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tutorial: Off"
+
+[node name="ControlsButton" type="Button" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.5
+offset_top = 25.0
+offset_right = 271.5
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Controls"
+
+[node name="CreditsButton" type="Button" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = 125.0
+offset_right = 271.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Credits"
+
+[node name="CreditsScreen" type="Control" parent="SettingsMenu"]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y0wrw")
+
+[node name="Programming" type="Label" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -851.0
+offset_top = -433.0
+offset_right = -357.0
+offset_bottom = -244.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Programming:
+Evan Veinotte"
+
+[node name="Art" type="Label" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -853.0
+offset_top = -184.0
+offset_right = -359.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Art:
+Evan Veinotte"
+
+[node name="Music and Audio" type="Label" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -859.0
+offset_top = 74.0
+offset_right = -272.0
+offset_bottom = 263.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music and Audio:
+Evan Veinotte
+"
+
+[node name="SocialMedia" type="Label" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -447.0
+offset_right = 858.0
+offset_bottom = -258.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Social Media Management:
+Emily Langlais"
+
+[node name="Patrons" type="Label" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -196.0
+offset_right = 277.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Patrons:
+-"
+
+[node name="BackButton" type="Button" parent="SettingsMenu/CreditsScreen"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = 329.0
+offset_right = 271.0
+offset_bottom = 422.0
+text = "Back"
+
+[node name="ControlsScreen" type="Control" parent="SettingsMenu"]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="SettingsMenu/ControlsScreen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lgc6")
+
+[node name="Movement" type="Label" parent="SettingsMenu/ControlsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -841.0
+offset_top = -142.0
+offset_right = -372.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Movement:
+Click and Hold
+WASD"
+
+[node name="GameMachine" type="Label" parent="SettingsMenu/ControlsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 262.0
+offset_top = -81.0
+offset_right = 852.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "In Game Machine:
+Click Buttons
+Arrow Keys and
+Spacebar"
+
+[node name="BuildMode" type="Label" parent="SettingsMenu/ControlsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -142.0
+offset_right = 153.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Build Mode:
+Click Player
+B key"
+
+[node name="Pause" type="Label" parent="SettingsMenu/ControlsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 254.0
+offset_top = -435.0
+offset_right = 903.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pause Menu:
+Click the Void Core
+Escape key"
+
+[node name="BackButton" type="Button" parent="SettingsMenu/ControlsScreen"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = 329.0
+offset_right = 271.0
+offset_bottom = 422.0
+text = "Back"
+
+[connection signal="mouse_entered" from="SettingsMenu/BackButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="mouse_entered" from="SettingsMenu/FullscreenButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/FullscreenButton" to="." method="_on_FullscreenButton_pressed"]
+[connection signal="ready" from="SettingsMenu/FullscreenButton" to="." method="_on_FullscreenButton_ready"]
+[connection signal="mouse_entered" from="SettingsMenu/MuteButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/MuteButton" to="." method="_on_MuteButton_pressed"]
+[connection signal="ready" from="SettingsMenu/MuteButton" to="." method="_on_MuteButton_ready"]
+[connection signal="mouse_entered" from="SettingsMenu/TutorialButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/TutorialButton" to="." method="_on_TutorialButton_pressed"]
+[connection signal="ready" from="SettingsMenu/TutorialButton" to="." method="_on_TutorialButton_ready"]
+[connection signal="mouse_entered" from="SettingsMenu/ControlsButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="mouse_entered" from="SettingsMenu/CreditsButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="ready" from="SettingsMenu/CreditsButton" to="." method="_on_TutorialButton_ready"]
+[connection signal="mouse_entered" from="SettingsMenu/CreditsScreen/BackButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/CreditsScreen/BackButton" to="." method="_on_CreditsBackButton_pressed"]
+[connection signal="mouse_entered" from="SettingsMenu/ControlsScreen/BackButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="SettingsMenu/ControlsScreen/BackButton" to="." method="_on_CreditsBackButton_pressed"]

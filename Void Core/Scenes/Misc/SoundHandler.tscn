@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://j8nqu1co08mj"]
+
+[ext_resource type="AudioStream" uid="uid://cvkvgy8c3d81m" path="res://Audio/WorldSFX/pickup1.mp3" id="1_8nlyv"]
+[ext_resource type="Script" path="res://Scripts/Misc/SoundHandler.gd" id="1_rp6qg"]
+[ext_resource type="AudioStream" uid="uid://bwwd14qsiqqq4" path="res://Audio/WorldSFX/place1.mp3" id="2_8708b"]
+[ext_resource type="AudioStream" uid="uid://bre6c7ytm0fen" path="res://Audio/WorldSFX/coinclink.mp3" id="3_ojahe"]
+[ext_resource type="AudioStream" uid="uid://cp7aqksrcxdfe" path="res://Audio/MinigameSFX/normalboop.mp3" id="4_hjvru"]
+[ext_resource type="AudioStream" uid="uid://bg8ohmq7ep1p1" path="res://Audio/MinigameSFX/error.mp3" id="5_kup7c"]
+[ext_resource type="AudioStream" uid="uid://cpyuv4a5gd8tn" path="res://Audio/MinigameSFX/win.mp3" id="6_apmmk"]
+[ext_resource type="AudioStream" uid="uid://33orsrkbp6hr" path="res://Audio/WorldSFX/voidinput.mp3" id="7_i5nlc"]
+[ext_resource type="AudioStream" uid="uid://8jxek4ksv5hx" path="res://Audio/WorldSFX/voidoutput2.mp3" id="8_f8f5y"]
+[ext_resource type="AudioStream" uid="uid://dp8nm02xcj6qu" path="res://Audio/WorldSFX/voidoutput.mp3" id="9_6qjer"]
+
+[node name="SoundHandler" type="Node"]
+script = ExtResource("1_rp6qg")
+
+[node name="Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_8nlyv")
+bus = &"SFX"
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8708b")
+volume_db = -7.0
+pitch_scale = 0.5
+bus = &"SFX"
+
+[node name="Place" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8708b")
+bus = &"SFX"
+
+[node name="Coinclink" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ojahe")
+bus = &"SFX"
+
+[node name="NormalBoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hjvru")
+bus = &"SFX"
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kup7c")
+bus = &"SFX"
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_apmmk")
+bus = &"SFX"
+
+[node name="VoidInput" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i5nlc")
+bus = &"SFX"
+
+[node name="VoidOutput" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_f8f5y")
+bus = &"SFX"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6qjer")
+volume_db = 5.622
+bus = &"SFX"

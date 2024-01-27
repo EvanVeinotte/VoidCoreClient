@@ -1,0 +1,515 @@
+[gd_scene load_steps=17 format=3 uid="uid://dyh8mnyeooeei"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/MainMenu.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dnbtbstjqci38" path="res://Images/Player/playerspritesheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://lbrku75a5cav" path="res://Images/Menu/LogoVoid.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dpfgo8k1qw6u" path="res://Images/Menu/LogoCore.png" id="4"]
+[ext_resource type="Theme" uid="uid://bts5qatdw76fe" path="res://Themes/MenuTheme.tres" id="5"]
+[ext_resource type="AudioStream" uid="uid://dp8nm02xcj6qu" path="res://Audio/WorldSFX/voidoutput.mp3" id="6"]
+[ext_resource type="Texture2D" uid="uid://clplcer72kchb" path="res://Images/Menu/MenuIcons/ClosedGarbageCan.png" id="6_qsnug"]
+[ext_resource type="Texture2D" uid="uid://dbyck5fyrb34e" path="res://Images/Menu/MenuIcons/OpenGarbageCan.png" id="7_b84qn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_78j0d"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="1"]
+resource_name = "MenuNormal"
+length = 3.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoVoid:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(476, 266), Vector2(476, 338)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LogoCore:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1427, 268), Vector2(1427, 338)]
+}
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoVoid:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(433, 266)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LogoCore:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1463, 268)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ubqol"]
+_data = {
+"MenuNormal": SubResource("1"),
+"RESET": SubResource("2")
+}
+
+[sub_resource type="Animation" id="3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoVoid:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(433, 266)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LogoCore:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1463, 268)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="4"]
+resource_name = "normal"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scawy"]
+_data = {
+"RESET": SubResource("3"),
+"normal": SubResource("4")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1m1m"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5")
+script = ExtResource("1")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_78j0d")
+
+[node name="LogoCore" type="Sprite2D" parent="."]
+position = Vector2(1463, 268)
+texture = ExtResource("4")
+
+[node name="LogoVoid" type="Sprite2D" parent="."]
+position = Vector2(433, 266)
+texture = ExtResource("3")
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(922, 312)
+texture = ExtResource("2")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ubqol")
+}
+autoplay = "MenuNormal"
+
+[node name="PlayerAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_scawy")
+}
+autoplay = "normal"
+
+[node name="MenuOptions" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PlayButton" type="Button" parent="MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.5
+offset_top = -46.5
+offset_right = 183.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="MultiplayerButton" type="Button" parent="MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = 50.0
+offset_right = 183.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Multiplayer"
+
+[node name="DimensionsButton" type="Button" parent="MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = 148.0
+offset_right = 183.0
+offset_bottom = 241.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Dimensions"
+
+[node name="SettingsBut" type="Button" parent="MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.5
+offset_top = 244.0
+offset_right = 183.5
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+
+[node name="ExitGameButton" type="Button" parent="MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = 338.0
+offset_right = 183.0
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+
+[node name="ComingSoon" type="Label" parent="MenuOptions"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -938.0
+offset_top = 431.0
+offset_right = -483.0
+offset_bottom = 524.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Coming Soon!"
+
+[node name="PlayOptions" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PlayWorld1Button" type="Button" parent="PlayOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = 8.0
+offset_right = 252.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load World 1"
+
+[node name="TrashButton1" type="TextureButton" parent="PlayOptions/PlayWorld1Button"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -49.0
+offset_right = 100.0
+offset_bottom = 41.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("6_qsnug")
+texture_pressed = ExtResource("6_qsnug")
+texture_hover = ExtResource("7_b84qn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PlayWorld2Button" type="Button" parent="PlayOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = 111.5
+offset_right = 252.0
+offset_bottom = 204.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load World 2"
+
+[node name="TrashButton2" type="TextureButton" parent="PlayOptions/PlayWorld2Button"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -49.0
+offset_right = 100.0
+offset_bottom = 41.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("6_qsnug")
+texture_pressed = ExtResource("6_qsnug")
+texture_hover = ExtResource("7_b84qn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PlayWorld3Button" type="Button" parent="PlayOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = 212.5
+offset_right = 252.0
+offset_bottom = 305.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load World 3"
+
+[node name="TrashButton3" type="TextureButton" parent="PlayOptions/PlayWorld3Button"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -49.0
+offset_right = 100.0
+offset_bottom = 41.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("6_qsnug")
+texture_pressed = ExtResource("6_qsnug")
+texture_hover = ExtResource("7_b84qn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BackButton" type="Button" parent="PlayOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = 329.0
+offset_right = 252.0
+offset_bottom = 422.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+
+[node name="AreYouSureOptions" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Areyousurelabel" type="Label" parent="AreYouSureOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -798.0
+offset_top = -46.5
+offset_right = 762.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Are you sure you want to delete this world?"
+
+[node name="YesImSure" type="Button" parent="AreYouSureOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = 91.0
+offset_right = 216.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Yes I'm Sure"
+
+[node name="NoNotSure" type="Button" parent="AreYouSureOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = 206.0
+offset_right = 73.0
+offset_bottom = 299.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "No"
+
+[node name="LoadingScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="LoadingScreen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v1m1m")
+
+[node name="Loading" type="Label" parent="LoadingScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -120.0
+offset_right = 347.0
+offset_bottom = -27.0
+grow_vertical = 0
+text = "Loading..."
+
+[node name="LoadingScreenTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6")
+
+[connection signal="mouse_entered" from="MenuOptions/PlayButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="MenuOptions/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="mouse_entered" from="MenuOptions/MultiplayerButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="MenuOptions/MultiplayerButton" to="." method="_on_MultiplayerButton_pressed"]
+[connection signal="mouse_entered" from="MenuOptions/DimensionsButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="MenuOptions/DimensionsButton" to="." method="_on_DimensionsButton_pressed"]
+[connection signal="mouse_entered" from="MenuOptions/SettingsBut" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="MenuOptions/SettingsBut" to="." method="_on_SettingsBut_pressed"]
+[connection signal="mouse_entered" from="MenuOptions/ExitGameButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="MenuOptions/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/PlayWorld1Button" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/PlayWorld1Button" to="." method="_on_play_world_1_button_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/PlayWorld1Button/TrashButton1" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/PlayWorld1Button/TrashButton1" to="." method="_on_trash_button_1_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/PlayWorld2Button" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/PlayWorld2Button" to="." method="_on_play_world_2_button_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/PlayWorld2Button/TrashButton2" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/PlayWorld2Button/TrashButton2" to="." method="_on_trash_button_2_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/PlayWorld3Button" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/PlayWorld3Button" to="." method="_on_play_world_3_button_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/PlayWorld3Button/TrashButton3" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/PlayWorld3Button/TrashButton3" to="." method="_on_trash_button_3_pressed"]
+[connection signal="mouse_entered" from="PlayOptions/BackButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="PlayOptions/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="mouse_entered" from="AreYouSureOptions/YesImSure" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="AreYouSureOptions/YesImSure" to="." method="_on_YesImSure_pressed"]
+[connection signal="mouse_entered" from="AreYouSureOptions/NoNotSure" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="AreYouSureOptions/NoNotSure" to="." method="_on_NoNotSure_pressed"]
+[connection signal="timeout" from="LoadingScreenTimer" to="." method="_on_loading_screen_timer_timeout"]
