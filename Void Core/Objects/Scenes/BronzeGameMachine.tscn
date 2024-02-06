@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://1dvqdpqf5f8f"]
+
+[ext_resource type="Script" path="res://Objects/Scripts/GameMachine.gd" id="1_d4xom"]
+[ext_resource type="Texture2D" uid="uid://cf8xnjs5fejmq" path="res://Images/GameMachines/gamemachinehighlight.png" id="2_qfvyj"]
+[ext_resource type="Texture2D" uid="uid://tmnjeyrfmfbo" path="res://Images/GameMachines/basicgamemachine.png" id="3_gqycc"]
+[ext_resource type="Texture2D" uid="uid://2ls0yrpo15ca" path="res://Images/GameMachines/screensheet.png" id="4_eghe8"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(91.2282, 13.1316)
+
+[sub_resource type="CapsuleShape2D" id="4"]
+radius = 73.9215
+height = 147.843
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Normal"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/ScreenSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/ScreenSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmg2c"]
+_data = {
+"Normal": SubResource("2"),
+"RESET": SubResource("3")
+}
+
+[node name="GameMachine" type="Node2D"]
+script = ExtResource("1_d4xom")
+mycointype = 10
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Highlight" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(0, -157)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_qfvyj")
+centered = false
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+position = Vector2(0, -157)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_gqycc")
+centered = false
+hframes = 2
+
+[node name="ScreenSprite" type="Sprite2D" parent="Body"]
+position = Vector2(151, -44)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_eghe8")
+hframes = 4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+visible = false
+
+[node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(107, 170)
+rotation = 0.464258
+shape = SubResource("1")
+
+[node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(198, 170)
+rotation = -0.464258
+shape = SubResource("1")
+
+[node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(109, 124)
+rotation = -0.464258
+shape = SubResource("1")
+
+[node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(196, 124)
+rotation = 0.464258
+shape = SubResource("1")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PackedVector2Array(58, -101, 228, -145, 216, -44, 271, 3, 248, 151, 156, 200, 62, 160)
+
+[node name="PlayerSensor" type="Area2D" parent="Body"]
+position = Vector2(151, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/PlayerSensor"]
+position = Vector2(1, 154)
+rotation = 1.56995
+shape = SubResource("4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jmg2c")
+}
+autoplay = "Normal"
+
+[node name="EssenceSpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Body/PlayerSensor" to="." method="_on_PlayerSensor_body_entered"]
+[connection signal="body_exited" from="Body/PlayerSensor" to="." method="_on_PlayerSensor_body_exited"]
+[connection signal="timeout" from="EssenceSpawnTimer" to="." method="_on_EssenceSpawnTimer_timeout"]

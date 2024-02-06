@@ -24,17 +24,18 @@ func loadDataFromFile(address):
 		var error = jsonreader.parse(file.get_as_text())
 		if(error == OK):
 			jsondata = jsonreader.data
+		else:
+			return {}
 		file.close()
-		if(jsondata):
-			#checks to make sure it's a valid world file. Random property check here
-			if(jsondata.has("firstlootarray")):
-				return jsondata
-	return false
+		return jsondata
+	return {}
 
 func saveWorldToFile(myworld, worldaddress):
 	var worldobject = {"player": {"position": {"x": myworld.player.position.x, "y": myworld.player.position.y}},
-						"newworld": myworld.newworld,
-						"firstlootarray": myworld.firstlootarray,
+						"newworld": false,
+						"onlineuid": myworld.onlineuid,
+						"onlineworldname": myworld.onlineworldname,
+						"firstlootarray": LootTable.firstlootarray,
 						"themap": myworld.themap}
 	saveDataToFile(worldobject, worldaddress)
 	#ShowSaveLabel()
@@ -56,7 +57,7 @@ func checkIfWorldFileExists(worldaddress):
 
 func loadNewWorld(worldaddress):
 	var newworld
-	var file = FileAccess.open("res://Saves/StarterMap.tres", FileAccess.READ)
+	var file = FileAccess.open("res://DataFiles/StarterMap.tres", FileAccess.READ)
 	if(file):
 		var jsondata
 		var jsonreader = JSON.new()
@@ -66,11 +67,16 @@ func loadNewWorld(worldaddress):
 		file.close()
 		if(jsondata):
 			newworld = jsondata
-	saveWorldToFile(newworld, worldaddress)
+	var onlineuid = Utils.genUID()
+	newworld["onlineuid"] = onlineuid
+	saveDataToFile(newworld, worldaddress)
 	return newworld
 
 func loadWorldFromFile(worldaddress):
 	var loadedworld = loadDataFromFile(worldaddress)
+	if(!loadedworld.has("onlineuid")):
+		loadedworld["onlineuid"] = Utils.genUID()
+		saveDataToFile(loadedworld, worldaddress)
 	return loadedworld
 
 func saveHighscoreToFile(listOfHighscores):
@@ -93,12 +99,24 @@ func loadSettingsFromFile():
 	if(settingsdata):
 		return settingsdata
 	else:
-		var initsettingsdata = {"tutorialenabled": true, "mute": false, "fullscreen": false}
+		var initsettingsdata = {"tutorialenabled": true, "mute": false, "fullscreen": true}
 		saveSettingsToFile(initsettingsdata)
 		return initsettingsdata
 
+func saveOnlineToFile(onlinedata):
+	saveDataToFile(onlinedata, "user://Online.tres")
+
+func loadOnlineDataFromFile():
+	var onlinedata = loadDataFromFile("user://Online.tres")
+	if(onlinedata):
+		return onlinedata
+	else:
+		var initonlinedata = {"username": ""}
+		saveSettingsToFile(initonlinedata)
+		return initonlinedata
+
 func deleteFile(fileaddress):
-	var dir = DirAccess.open(fileaddress)
+	var dir = DirAccess.open("user://")
 	if(dir):
 		if(dir.remove(fileaddress) != OK):
 			print("Could not locate the file to delete.")

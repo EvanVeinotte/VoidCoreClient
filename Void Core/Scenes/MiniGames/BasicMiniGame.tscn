@@ -1,0 +1,263 @@
+[gd_scene load_steps=19 format=3 uid="uid://kxkl3kmm6q1c"]
+
+[ext_resource type="Texture2D" uid="uid://b3e58asnly37p" path="res://Images/MiniGames/ArcadeBg.png" id="1"]
+[ext_resource type="Script" path="res://Scripts/MiniGames/Basic/BasicMiniGame.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c8s0hatpuiyp6" path="res://Images/MiniGames/BasicGame/playersheet.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://c8vpe7gj3qwjs" path="res://Images/MiniGames/gamescreenbg.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ds71i4c7gs282" path="res://Images/MiniGames/Arrowbutton/arrowbuttonnormal.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c3g7s0r4abc4x" path="res://Images/MiniGames/Arrowbutton/arrowbuttonpressed.png" id="6"]
+[ext_resource type="BitMap" uid="uid://bj7ldwaaq36fd" path="res://Images/MiniGames/Arrowbutton/clickmask.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://1k4sk82pljwe" path="res://Images/MiniGames/Arrowbutton/downarrownormal.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://c5bqm67ocyuhk" path="res://Images/MiniGames/Arrowbutton/downarrowpressed.png" id="9"]
+[ext_resource type="BitMap" uid="uid://dnqol7fx2efbi" path="res://Images/MiniGames/Arrowbutton/downarrowclickmask.png" id="10"]
+[ext_resource type="PackedScene" uid="uid://b02yvhvcysvlu" path="res://Scenes/MiniGames/Basic/Enemy.tscn" id="11"]
+[ext_resource type="Texture2D" uid="uid://b6228sij6l266" path="res://Images/MiniGames/Numberssheet.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://dpc0pexpshrxg" path="res://Images/MiniGames/Coinsfull.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://dkgyn02u3xou6" path="res://Images/MiniGames/gameover.png" id="14"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(50, 140)
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7hvw"]
+_data = {
+"Idle": SubResource("2"),
+"RESET": SubResource("3")
+}
+
+[node name="BasicMiniGame" type="Node2D"]
+texture_filter = 3
+script = ExtResource("2")
+
+[node name="BG" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1")
+centered = false
+
+[node name="Screen" type="Node2D" parent="."]
+
+[node name="ScreenBG" type="Sprite2D" parent="Screen"]
+position = Vector2(163, 135)
+scale = Vector2(10, 10)
+texture = ExtResource("4")
+centered = false
+
+[node name="Player" type="Node2D" parent="Screen"]
+position = Vector2(250, 510)
+
+[node name="Sprite" type="Sprite2D" parent="Screen/Player"]
+scale = Vector2(10, 10)
+texture = ExtResource("3")
+centered = false
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="Screen/Player"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Screen/Player/Area2D"]
+position = Vector2(25, 80)
+shape = SubResource("1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Screen/Player"]
+libraries = {
+"": SubResource("AnimationLibrary_i7hvw")
+}
+autoplay = "Idle"
+
+[node name="Enemy1" parent="Screen" instance=ExtResource("11")]
+visible = false
+position = Vector2(1200, 260)
+
+[node name="Enemy2" parent="Screen" instance=ExtResource("11")]
+visible = false
+
+[node name="Enemy3" parent="Screen" instance=ExtResource("11")]
+visible = false
+position = Vector2(1200, 740)
+
+[node name="Score" type="Node2D" parent="Screen"]
+position = Vector2(163, 135)
+
+[node name="digit1" type="Sprite2D" parent="Screen/Score"]
+position = Vector2(390, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit2" type="Sprite2D" parent="Screen/Score"]
+position = Vector2(350, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit3" type="Sprite2D" parent="Screen/Score"]
+position = Vector2(310, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit4" type="Sprite2D" parent="Screen/Score"]
+position = Vector2(270, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit5" type="Sprite2D" parent="Screen/Score"]
+position = Vector2(230, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="Highscore" type="Node2D" parent="Screen"]
+position = Vector2(763, 135)
+
+[node name="digit1" type="Sprite2D" parent="Screen/Highscore"]
+position = Vector2(390, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit2" type="Sprite2D" parent="Screen/Highscore"]
+position = Vector2(350, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit3" type="Sprite2D" parent="Screen/Highscore"]
+position = Vector2(310, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit4" type="Sprite2D" parent="Screen/Highscore"]
+position = Vector2(270, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit5" type="Sprite2D" parent="Screen/Highscore"]
+position = Vector2(230, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="Coins" type="Node2D" parent="Screen"]
+position = Vector2(873, 135)
+
+[node name="digit1" type="Sprite2D" parent="Screen/Coins"]
+position = Vector2(390, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="digit2" type="Sprite2D" parent="Screen/Coins"]
+position = Vector2(350, 20)
+scale = Vector2(10, 10)
+texture = ExtResource("12")
+centered = false
+hframes = 11
+frame = 10
+
+[node name="CoinsFull" type="Sprite2D" parent="Screen"]
+visible = false
+position = Vector2(463, 755)
+scale = Vector2(10, 10)
+texture = ExtResource("13")
+centered = false
+
+[node name="GameOver" type="Sprite2D" parent="Screen"]
+visible = false
+position = Vector2(463, 525)
+scale = Vector2(10, 10)
+texture = ExtResource("14")
+centered = false
+
+[node name="Buttons" type="Node2D" parent="."]
+modulate = Color(0.317647, 0.317647, 0.317647, 1)
+
+[node name="UpArrow" type="TextureButton" parent="Buttons"]
+texture_filter = 4
+offset_left = 1476.0
+offset_top = 76.0
+offset_right = 1876.0
+offset_bottom = 476.0
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("6")
+texture_click_mask = ExtResource("7")
+stretch_mode = 5
+
+[node name="DownArrow" type="TextureButton" parent="Buttons"]
+texture_filter = 4
+offset_left = 1476.0
+offset_top = 420.0
+offset_right = 1876.0
+offset_bottom = 820.0
+texture_normal = ExtResource("8")
+texture_pressed = ExtResource("9")
+texture_click_mask = ExtResource("10")
+stretch_mode = 5
+
+[node name="RestartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BlinkTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Screen/Player/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="button_down" from="Buttons/UpArrow" to="." method="_on_UpArrow_button_down"]
+[connection signal="button_down" from="Buttons/DownArrow" to="." method="_on_DownArrow_button_down"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]

@@ -1,0 +1,299 @@
+[gd_scene load_steps=20 format=3 uid="uid://bujp5hp3trngp"]
+
+[ext_resource type="Theme" uid="uid://bts5qatdw76fe" path="res://Themes/MenuTheme.tres" id="1_qece0"]
+[ext_resource type="Script" path="res://Scripts/Menus/DimensionsMenu.gd" id="2_jo8sh"]
+[ext_resource type="Texture2D" uid="uid://dcon6757m7bqn" path="res://Images/MiniGames/xbutton/xbuttonnormal.png" id="2_y2vw6"]
+[ext_resource type="Texture2D" uid="uid://djyglqnandpm4" path="res://Images/MiniGames/xbutton/xbuttonpressed.png" id="3_ndmol"]
+[ext_resource type="BitMap" uid="uid://ohohhxkaj76w" path="res://Images/MiniGames/xbutton/clickmask.png" id="4_76tla"]
+[ext_resource type="Texture2D" uid="uid://ds71i4c7gs282" path="res://Images/MiniGames/Arrowbutton/arrowbuttonnormal.png" id="5_iixjo"]
+[ext_resource type="Texture2D" uid="uid://c3g7s0r4abc4x" path="res://Images/MiniGames/Arrowbutton/arrowbuttonpressed.png" id="6_snjbl"]
+[ext_resource type="BitMap" uid="uid://bj7ldwaaq36fd" path="res://Images/MiniGames/Arrowbutton/clickmask.png" id="7_ptasd"]
+[ext_resource type="FontFile" uid="uid://cjlbqm5nqc440" path="res://Fonts/Kogo_font_v1-Regular.ttf" id="8_mpvwi"]
+[ext_resource type="PackedScene" uid="uid://dy1srsay8uo4n" path="res://Scenes/Menus/DimensionPanel.tscn" id="10_6d4ak"]
+[ext_resource type="Texture2D" uid="uid://ccmbqn050swjw" path="res://Images/Player/playerfallingspritesheet.png" id="11_bvbf1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdseo"]
+bg_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jx0y"]
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+shadow_size = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_fvsf5"]
+font_size = 156
+
+[sub_resource type="LabelSettings" id="LabelSettings_hfewj"]
+font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7ufo"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Animation" id="Animation_r75mo"]
+resource_name = "Loading"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_w03ae"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wguyl"]
+_data = {
+"Loading": SubResource("Animation_r75mo"),
+"RESET": SubResource("Animation_w03ae")
+}
+
+[node name="DimensionsMenu" type="Control" node_paths=PackedStringArray("searchline", "clearbutt", "pagelabel", "incarrow", "decarrow", "panelholder", "loadingscreen")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qece0")
+script = ExtResource("2_jo8sh")
+searchline = NodePath("VBoxContainer/Header/SearchBar/LineEdit")
+clearbutt = NodePath("VBoxContainer/Header/SearchBar/ClearButton")
+pagelabel = NodePath("VBoxContainer/Header/PageSelect/Label")
+incarrow = NodePath("VBoxContainer/Header/PageSelect/IncArrow")
+decarrow = NodePath("VBoxContainer/Header/PageSelect/DecArrow")
+panelholder = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+loadingscreen = NodePath("LoadingPanel")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rdseo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1jx0y")
+
+[node name="ExitButton" type="TextureButton" parent="VBoxContainer/Header"]
+texture_filter = 4
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -202.0
+offset_bottom = 202.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_y2vw6")
+texture_pressed = ExtResource("3_ndmol")
+texture_click_mask = ExtResource("4_76tla")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.5
+offset_top = 47.0
+offset_right = 324.5
+offset_bottom = 204.0
+grow_horizontal = 2
+text = "Dimensions"
+label_settings = SubResource("LabelSettings_fvsf5")
+
+[node name="PageSelect" type="Control" parent="VBoxContainer/Header"]
+anchors_preset = 0
+offset_left = 109.0
+offset_top = 57.0
+offset_right = 552.0
+offset_bottom = 158.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/PageSelect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -65.0
+offset_right = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Page 1/5"
+label_settings = SubResource("LabelSettings_hfewj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IncArrow" type="TextureButton" parent="VBoxContainer/Header/PageSelect"]
+texture_filter = 4
+layout_mode = 0
+offset_left = 494.0
+offset_top = -8.0
+offset_right = 634.0
+offset_bottom = 122.0
+rotation = 1.5708
+texture_normal = ExtResource("5_iixjo")
+texture_pressed = ExtResource("6_snjbl")
+texture_click_mask = ExtResource("7_ptasd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DecArrow" type="TextureButton" parent="VBoxContainer/Header/PageSelect"]
+texture_filter = 4
+layout_mode = 0
+offset_left = -51.0
+offset_top = 132.0
+offset_right = 89.0
+offset_bottom = 262.0
+rotation = 4.71239
+texture_normal = ExtResource("5_iixjo")
+texture_pressed = ExtResource("6_snjbl")
+texture_click_mask = ExtResource("7_ptasd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SearchBar" type="VBoxContainer" parent="VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 375.0
+offset_top = -113.0
+offset_right = 701.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Header/SearchBar"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("8_mpvwi")
+theme_override_font_sizes/font_size = 48
+placeholder_text = "Search..."
+max_length = 32
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/Header/SearchBar"]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_w7ufo")
+text = "Clear"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DimensionPanel" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("10_6d4ak")]
+layout_mode = 2
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 5.0
+
+[node name="ServerClosed" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -573.5
+offset_top = -46.5
+offset_right = 573.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Server is closed for maintenance."
+
+[node name="LoadingPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="LoadingPanel"]
+position = Vector2(957, 304)
+texture = ExtResource("11_bvbf1")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_wguyl")
+}
+autoplay = "Loading"
+
+[connection signal="pressed" from="VBoxContainer/Header/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Header/PageSelect/IncArrow" to="." method="_on_inc_arrow_pressed"]
+[connection signal="pressed" from="VBoxContainer/Header/PageSelect/DecArrow" to="." method="_on_dec_arrow_pressed"]
+[connection signal="text_submitted" from="VBoxContainer/Header/SearchBar/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/Header/SearchBar/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

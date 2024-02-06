@@ -1,5 +1,12 @@
 extends Node
 
+func getDigit(fullnum, digitpos):
+	var endposdivider = pow(10, digitpos)
+	var startposdivider = pow(10, digitpos+1)
+	var withstartposremoved = fullnum - floor(fullnum/startposdivider) * startposdivider
+	var finalvalue = floor(withstartposremoved/endposdivider)
+	return finalvalue
+
 func checkIfNewWorld():
 	Globs.newworld = Globs.worlddata.newworld
 
@@ -32,25 +39,25 @@ func getObjectValue(encoded, valtoget):
 	var endpos
 	
 	if(valtoget == "object_id"):
-		startpos = 0
-		endpos = 5
-	elif(valtoget == "object_state"):
 		startpos = 5
-		endpos = 8
-	elif(valtoget == "object_rotation"):
+		endpos = 0
+	elif(valtoget == "object_state"):
 		startpos = 8
-		endpos = 9
+		endpos = 5
+	elif(valtoget == "object_rotation"):
+		startpos = 9
+		endpos = 8
 	
 	var endposdivider = pow(10, endpos)
 	var startposdivider = pow(10, startpos)
 	var withstartposremoved = encoded - floor(encoded/startposdivider) * startposdivider
 	var finalvalue = floor(withstartposremoved/endposdivider)
-	return finalvalue
+	return int(finalvalue)
 
 func encodeObjectData(obj):
 	var objectid = obj.myobjid
-	var objectstate = obj.mystate * 100000
-	var objectrotation = int(obj.rotated) * 100000000
+	var objectstate = obj.myobjstate * 100000
+	var objectrotation = int(obj.myobjrot) * 100000000
 	var encodedvalue = objectrotation + objectstate + objectid
 	return encodedvalue
 
@@ -68,3 +75,17 @@ func globalPosToWorld(globpos):
 	worldxpos = floor(worldxpos)
 	worldypos = floor(worldypos)
 	return Vector3(worldxpos, worldypos, 0)
+
+func createEmptyChunkArray():
+	var newchunkarray = []
+	for z in range(Globs.MAP_SIZE.z):
+		newchunkarray.append([])
+		for y in range(Globs.CHUNK_SIZE):
+			newchunkarray[z].append([])
+			for x in range(Globs.CHUNK_SIZE):
+				newchunkarray[z][y].append(0)
+	return newchunkarray
+
+func genUID():
+	var newuid = str(Time.get_unix_time_from_system() * 1000) + str(int(randf() * 9999))
+	return newuid

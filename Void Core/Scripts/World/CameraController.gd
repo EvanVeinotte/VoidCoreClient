@@ -5,9 +5,13 @@ extends Camera2D
 
 func _ready():
 	self.position = player.position
+	if(SettingsMenu.settingsdata.tutorialenabled and Globs.newworld):
+		self.enabled = false
 
+func setDirectlyOnPlayer():
+	self.position = player.position
 
-func _process(delta):
+func _process(_delta):
 	var playerdist = player.position - self.position
 
 	if(abs(playerdist.x) > 1 or abs(playerdist.y) > 1):

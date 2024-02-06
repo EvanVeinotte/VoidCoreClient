@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://j8nqu1co08mj"]
+[gd_scene load_steps=14 format=3 uid="uid://j8nqu1co08mj"]
 
 [ext_resource type="AudioStream" uid="uid://cvkvgy8c3d81m" path="res://Audio/WorldSFX/pickup1.mp3" id="1_8nlyv"]
 [ext_resource type="Script" path="res://Scripts/Misc/SoundHandler.gd" id="1_rp6qg"]
 [ext_resource type="AudioStream" uid="uid://bwwd14qsiqqq4" path="res://Audio/WorldSFX/place1.mp3" id="2_8708b"]
+[ext_resource type="AudioStream" uid="uid://2far5q2ldvk7" path="res://Audio/WorldSFX/camerasnap.mp3" id="3_aod0f"]
 [ext_resource type="AudioStream" uid="uid://bre6c7ytm0fen" path="res://Audio/WorldSFX/coinclink.mp3" id="3_ojahe"]
 [ext_resource type="AudioStream" uid="uid://cp7aqksrcxdfe" path="res://Audio/MinigameSFX/normalboop.mp3" id="4_hjvru"]
 [ext_resource type="AudioStream" uid="uid://bg8ohmq7ep1p1" path="res://Audio/MinigameSFX/error.mp3" id="5_kup7c"]
@@ -10,12 +11,18 @@
 [ext_resource type="AudioStream" uid="uid://33orsrkbp6hr" path="res://Audio/WorldSFX/voidinput.mp3" id="7_i5nlc"]
 [ext_resource type="AudioStream" uid="uid://8jxek4ksv5hx" path="res://Audio/WorldSFX/voidoutput2.mp3" id="8_f8f5y"]
 [ext_resource type="AudioStream" uid="uid://dp8nm02xcj6qu" path="res://Audio/WorldSFX/voidoutput.mp3" id="9_6qjer"]
+[ext_resource type="AudioStream" uid="uid://dcto2boeiod7q" path="res://Audio/WorldSFX/step1.mp3" id="11_04rke"]
+[ext_resource type="AudioStream" uid="uid://cf8tg34nct5eh" path="res://Audio/Music/VoidAmbience_MoreDissonance.mp3" id="13_qm7nn"]
 
 [node name="SoundHandler" type="Node"]
 script = ExtResource("1_rp6qg")
 
 [node name="Pickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_8nlyv")
+bus = &"SFX"
+
+[node name="CameraSnap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_aod0f")
 bus = &"SFX"
 
 [node name="ButtonHover" type="AudioStreamPlayer" parent="."]
@@ -40,6 +47,16 @@ bus = &"SFX"
 stream = ExtResource("5_kup7c")
 bus = &"SFX"
 
+[node name="IndicateCorrect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kup7c")
+pitch_scale = 2.4
+bus = &"SFX"
+
+[node name="IndicateIncorrect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kup7c")
+pitch_scale = 2.0
+bus = &"SFX"
+
 [node name="Win" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_apmmk")
 bus = &"SFX"
@@ -56,3 +73,18 @@ bus = &"SFX"
 stream = ExtResource("9_6qjer")
 volume_db = 5.622
 bus = &"SFX"
+
+[node name="Walking" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_04rke")
+bus = &"SFX"
+
+[node name="Bouncing" type="AudioStreamPlayer" parent="."]
+volume_db = 10.0
+
+[node name="Wind" type="AudioStreamPlayer" parent="."]
+volume_db = -60.583
+
+[node name="VoidAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_qm7nn")
+autoplay = true
+bus = &"Music"

@@ -5,7 +5,7 @@ extends Control
 @onready var areyousureoptions = get_node("AreYouSureOptions")
 
 
-@onready var worldscene = load("res://Scenes/Main.tscn")
+@onready var worldscene = load("res://Scenes/World/game_world.tscn")
 
 var displaylabeltween
 
@@ -98,22 +98,29 @@ func _on_YesImSure_pressed():
 
 
 func _on_loading_screen_timer_timeout():
-	var makenewworld = FileHandler.checkIfWorldFileExists(worldaddresstoload)
+	startWorld()
+
+func startWorld():
+	var makenewworld = !FileHandler.checkIfWorldFileExists(worldaddresstoload)
 	var newworlddata
 	if(makenewworld):
 		newworlddata = FileHandler.loadNewWorld(worldaddresstoload)
 	else:
 		newworlddata = FileHandler.loadWorldFromFile(worldaddresstoload)
-	var worldinstance = worldscene.instance()
+	var worldinstance = worldscene.instantiate()
 	Globs.worlddata = newworlddata
+	Globs.newworld = newworlddata.newworld
 	Utils.checkIfNewWorld()
 	Utils.checkIfIntroCutscene()
 	Globs.inworld = true
+	Globs.thisworldismine = true
+	Globs.onlineuid = newworlddata.onlineuid
+	Globs.onlineworldname = newworlddata.onlineworldname
 	get_tree().get_root().add_child(worldinstance)
 	queue_free()
 
-
 func _on_play_world_1_button_pressed():
+	Globs.currentworldfileaddress = "user://World1.tres" 
 	worldaddresstoload = "user://World1.tres"
 	SoundHandler.playSFX("ButtonSound")
 	get_node("LoadingScreen").visible = true
@@ -121,6 +128,7 @@ func _on_play_world_1_button_pressed():
 
 
 func _on_play_world_2_button_pressed():
+	Globs.currentworldfileaddress = "user://World2.tres" 
 	worldaddresstoload = "user://World2.tres"
 	SoundHandler.playSFX("ButtonSound")
 	get_node("LoadingScreen").visible = true
@@ -128,6 +136,7 @@ func _on_play_world_2_button_pressed():
 
 
 func _on_play_world_3_button_pressed():
+	Globs.currentworldfileaddress = "user://World3.tres" 
 	worldaddresstoload = "user://World3.tres"
 	SoundHandler.playSFX("ButtonSound")
 	get_node("LoadingScreen").visible = true

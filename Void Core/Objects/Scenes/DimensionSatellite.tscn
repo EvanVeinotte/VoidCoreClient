@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs025yxli7bgk"]
+
+[ext_resource type="Script" path="res://Objects/Scripts/DimensionSatellite.gd" id="1_74mqi"]
+[ext_resource type="Texture2D" uid="uid://d3y3xb0fh8mj2" path="res://Images/SpecialObjects/DimensionSatellite/DimensionSatelliteHighlight.png" id="2_rmp2u"]
+[ext_resource type="Texture2D" uid="uid://b7akcep35rmf5" path="res://Images/SpecialObjects/DimensionSatellite/DimensionSatellite.png" id="3_xylao"]
+[ext_resource type="Texture2D" uid="uid://bgi73je57gp8j" path="res://Images/SpecialObjects/DimensionSatellite/DimensionSatelliteIndicators.png" id="4_8hunl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1s10"]
+radius = 49.0
+height = 190.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_om4bk"]
+radius = 62.9975
+height = 235.993
+
+[node name="DimensionSatellite" type="Node2D"]
+script = ExtResource("1_74mqi")
+
+[node name="Thumbnailer" type="Camera2D" parent="."]
+position = Vector2(147, 150)
+enabled = false
+zoom = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Highlight" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(0, -51)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_rmp2u")
+centered = false
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+position = Vector2(0, -51)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_xylao")
+centered = false
+hframes = 2
+
+[node name="Indicators" type="Sprite2D" parent="Body"]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(150, 80)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_8hunl")
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+position = Vector2(148, 146)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/StaticBody2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u1s10")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PackedVector2Array(50, 163, 55, -33, 159, -27, 244, 37, 252, 162, 205, 192, 108, 198)
+
+[node name="PlayerSensor" type="Area2D" parent="Body"]
+position = Vector2(144, 155)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/PlayerSensor"]
+rotation = 1.56995
+shape = SubResource("CapsuleShape2D_om4bk")
+
+[connection signal="body_entered" from="Body/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Body/Area2D" to="." method="_on_area_2d_body_exited"]

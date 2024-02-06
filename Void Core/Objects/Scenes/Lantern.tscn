@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyyeilmnm0l5n"]
+
+[ext_resource type="Script" path="res://Objects/Scripts/LightSource1by1.gd" id="1_l2mpf"]
+[ext_resource type="Texture2D" uid="uid://clp4xigda06l0" path="res://Images/LightObjects/IronLantern.png" id="2_uey0t"]
+[ext_resource type="Texture2D" uid="uid://dd5714tncvh0c" path="res://Images/Misc/lightsource.png" id="3_mdd6k"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(50.804, 13.1316)
+
+[node name="LightSource1by1" type="Node2D"]
+script = ExtResource("1_l2mpf")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+position = Vector2(0, -37)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_uey0t")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+position = Vector2(0, -37)
+
+[node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(128, 204)
+rotation = 0.558396
+shape = SubResource("1")
+
+[node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(177.813, 203.441)
+rotation = -0.563789
+shape = SubResource("1")
+
+[node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(128, 173)
+rotation = -0.554731
+shape = SubResource("1")
+
+[node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(172, 173)
+rotation = 0.62798
+shape = SubResource("1")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PackedVector2Array(100, 58, 158, 26, 197, 45, 205, 167, 151, 196, 105, 170)
+
+[node name="Light2D" type="PointLight2D" parent="Body"]
+position = Vector2(148, 137)
+scale = Vector2(1.76172, 0.84375)
+shadow_enabled = true
+shadow_filter_smooth = 50.0
+texture = ExtResource("3_mdd6k")
+texture_scale = 2.26

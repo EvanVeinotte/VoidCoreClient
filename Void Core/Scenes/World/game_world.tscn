@@ -1,19 +1,324 @@
-[gd_scene load_steps=4 format=3 uid="uid://jkm4hd4hhmya"]
+[gd_scene load_steps=18 format=3 uid="uid://jkm4hd4hhmya"]
 
 [ext_resource type="Script" path="res://Scripts/World/World.gd" id="1_11eu3"]
 [ext_resource type="Script" path="res://Scripts/World/CameraController.gd" id="1_isg8m"]
 [ext_resource type="Script" path="res://Scripts/World/ChunkLoader.gd" id="1_vjatr"]
+[ext_resource type="PackedScene" uid="uid://brpva8y2do5ck" path="res://Scenes/World/Player.tscn" id="3_tbgon"]
+[ext_resource type="FontFile" uid="uid://cjlbqm5nqc440" path="res://Fonts/Kogo_font_v1-Regular.ttf" id="5_l81ul"]
+[ext_resource type="Theme" uid="uid://bts5qatdw76fe" path="res://Themes/MenuTheme.tres" id="6_lt4hc"]
+[ext_resource type="Script" path="res://Scripts/Menus/PauseMenu.gd" id="7_oso72"]
+[ext_resource type="PackedScene" uid="uid://81o2p7dx8df1" path="res://Scenes/World/MiniGame.tscn" id="8_j6wy8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggtv7"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xrs7"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("5_l81ul")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="Theme" id="2"]
+default_font = SubResource("1")
+
+[sub_resource type="Animation" id="7"]
+resource_name = "CineCome"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopCinePanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopCinePanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BotCinePanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BotCinePanel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1e-05), Vector2(1, -1)]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "CineGone"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopCinePanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopCinePanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BotCinePanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BotCinePanel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, -1), Vector2(1, 1e-05)]
+}
+
+[sub_resource type="Animation" id="6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopCinePanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopCinePanel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BotCinePanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BotCinePanel:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1o8nl"]
+_data = {
+"CineCome": SubResource("7"),
+"CineGone": SubResource("5"),
+"RESET": SubResource("6")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2aym0"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="GameWorld" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
 y_sort_enabled = true
+texture_filter = 4
 script = ExtResource("1_11eu3")
 
 [node name="ChunkLoader" type="Node2D" parent="World"]
 y_sort_enabled = true
 script = ExtResource("1_vjatr")
 
-[node name="MainCamera" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+[node name="Player" parent="World" instance=ExtResource("3_tbgon")]
+position = Vector2(150, 1300)
+
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(150, 1300)
+zoom = Vector2(0.5, 0.5)
 script = ExtResource("1_isg8m")
+player = NodePath("../World/Player")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.639216, 0.639216, 0.639216, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopCinePanel" type="Panel" parent="CanvasLayer"]
+visible = false
+offset_left = -19.0
+offset_top = -12.0
+offset_right = 1940.0
+offset_bottom = 208.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ggtv7")
+
+[node name="BotCinePanel" type="Panel" parent="CanvasLayer"]
+visible = false
+offset_left = -24.0
+offset_top = 1091.0
+offset_right = 1941.0
+offset_bottom = 1311.0
+scale = Vector2(1, -1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_1xrs7")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+theme = SubResource("2")
+text = "Hello"
+
+[node name="SaveLabel" type="Label" parent="CanvasLayer"]
+visible = false
+theme = SubResource("2")
+text = "World Saved"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_1o8nl")
+}
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_lt4hc")
+script = ExtResource("7_oso72")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PauseMenu"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2aym0")
+
+[node name="MenuOptions" type="Control" parent="CanvasLayer/PauseMenu"]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ReturnButton" type="Button" parent="CanvasLayer/PauseMenu/MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -46.0
+offset_right = 205.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return"
+
+[node name="SettingsBut" type="Button" parent="CanvasLayer/PauseMenu/MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = 54.0
+offset_right = 208.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/PauseMenu/MenuOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = 156.0
+offset_right = 204.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+
+[node name="Minigame" parent="." instance=ExtResource("8_j6wy8")]
+
+[connection signal="mouse_entered" from="CanvasLayer/PauseMenu/MenuOptions/ReturnButton" to="CanvasLayer/PauseMenu" method="_on_button_hovered"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MenuOptions/ReturnButton" to="CanvasLayer/PauseMenu" method="_on_ReturnButton_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/PauseMenu/MenuOptions/SettingsBut" to="CanvasLayer/PauseMenu" method="_on_button_hovered"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MenuOptions/SettingsBut" to="CanvasLayer/PauseMenu" method="_on_SettingsBut_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/PauseMenu/MenuOptions/MainMenuButton" to="CanvasLayer/PauseMenu" method="_on_button_hovered"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MenuOptions/MainMenuButton" to="CanvasLayer/PauseMenu" method="_on_MainMenuButton_pressed"]

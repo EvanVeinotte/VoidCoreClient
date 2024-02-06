@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://8suusi4ntl7f"]
+
+[ext_resource type="Script" path="res://Objects/Scripts/FloorTile.gd" id="1_4uqd2"]
+[ext_resource type="Texture2D" uid="uid://cd24xa3aktmj6" path="res://Images/Floors/dirttile.png" id="2_o5wir"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(140.427, 13.1316)
+
+[node name="FloorTile" type="Node2D"]
+script = ExtResource("1_4uqd2")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_o5wir")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+
+[node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(73, 119)
+rotation = 0.464258
+shape = SubResource("1")
+
+[node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(226, 120)
+rotation = -0.464258
+shape = SubResource("1")
+
+[node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(71.5377, 32.0707)
+rotation = -0.464258
+shape = SubResource("1")
+
+[node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(228, 32)
+rotation = 0.464258
+shape = SubResource("1")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PackedVector2Array(0, 75, 150, 0, 300, 75, 300, 150, 150, 225, 0, 150)

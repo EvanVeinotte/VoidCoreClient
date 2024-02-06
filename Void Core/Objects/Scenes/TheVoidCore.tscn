@@ -1,0 +1,231 @@
+[gd_scene load_steps=14 format=3 uid="uid://bms647busbv6e"]
+
+[ext_resource type="Texture2D" uid="uid://d03vneixdcg6" path="res://Images/TheVoidCore/newwhitespinner.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bkgncr0lg4urg" path="res://Images/Floors/tile.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b2gld56wdufli" path="res://Images/TheVoidCore/theshadow.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bmu5p6igyeheu" path="res://Images/TheVoidCore/thecircle.png" id="5"]
+[ext_resource type="Script" path="res://Scripts/NPCScripts/VoidCoreScript.gd" id="5_axysi"]
+[ext_resource type="Texture2D" uid="uid://lfgt4xvfos6o" path="res://Images/TheVoidCore/thecirclehighlight.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://ccemwlp46dedi" path="res://Scenes/Misc/SpeechBox.tscn" id="7"]
+[ext_resource type="Script" path="res://Objects/Scripts/TheVoidCore.gd" id="8"]
+
+[sub_resource type="RectangleShape2D" id="7"]
+size = Vector2(140.427, 13.1316)
+
+[sub_resource type="CapsuleShape2D" id="10"]
+radius = 110.941
+height = 221.882
+
+[sub_resource type="Animation" id="8"]
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/TheBall/WhiteSpinner/Sprite1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/TheBall:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-150, -450), Vector2(-150, -423)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/TheShadow:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1.2175, 0.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/TheBall/WhiteSpinner/Sprite2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/TheBall/WhiteSpinner/Sprite3:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="9"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/TheBall/WhiteSpinner/Sprite1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/TheBall:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-150, -450)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/TheShadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_freia"]
+_data = {
+"Idle": SubResource("8"),
+"RESET": SubResource("9")
+}
+
+[node name="TheVoidCore" type="Node2D"]
+script = ExtResource("8")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Thetile" type="Sprite2D" parent="Body"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2")
+centered = false
+
+[node name="TheShadow" type="Sprite2D" parent="Body"]
+position = Vector2(147, -110)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4")
+
+[node name="TheBall" type="Sprite2D" parent="Body"]
+z_index = 10
+position = Vector2(-150, -450)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5")
+centered = false
+script = ExtResource("5_axysi")
+
+[node name="Highlighter" type="Sprite2D" parent="Body/TheBall"]
+visible = false
+show_behind_parent = true
+position = Vector2(400, 450)
+texture = ExtResource("6")
+
+[node name="Hungry" type="Sprite2D" parent="Body/TheBall"]
+show_behind_parent = true
+position = Vector2(400, 450)
+texture = ExtResource("5")
+
+[node name="WhiteSpinner" type="Node2D" parent="Body/TheBall"]
+position = Vector2(200, 600)
+scale = Vector2(1.33333, 1.33333)
+
+[node name="Sprite1" type="Sprite2D" parent="Body/TheBall/WhiteSpinner"]
+position = Vector2(148, -198)
+texture = ExtResource("1")
+hframes = 6
+
+[node name="Sprite2" type="Sprite2D" parent="Body/TheBall/WhiteSpinner"]
+position = Vector2(148, -198)
+rotation = 3.14159
+texture = ExtResource("1")
+hframes = 6
+
+[node name="Sprite3" type="Sprite2D" parent="Body/TheBall/WhiteSpinner"]
+position = Vector2(148, -198)
+rotation = 4.18879
+texture = ExtResource("1")
+hframes = 6
+
+[node name="SpeechBox" parent="Body/TheBall" instance=ExtResource("7")]
+offset_left = -382.667
+offset_top = -436.0
+offset_right = 1185.33
+offset_bottom = -9.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+
+[node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(73, 119)
+rotation = 0.464258
+shape = SubResource("7")
+
+[node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(226, 120)
+rotation = -0.464258
+shape = SubResource("7")
+
+[node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(71.5377, 32.0707)
+rotation = -0.464258
+shape = SubResource("7")
+
+[node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(228, 32)
+rotation = 0.464258
+shape = SubResource("7")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PackedVector2Array(-12, -26, -101, -189, -45, -364, 145, -468, 352, -385, 395, -187, 314, -41, 300, 150, 150, 225, 0, 150)
+
+[node name="PlayerSensor" type="Area2D" parent="Body"]
+position = Vector2(151, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/PlayerSensor"]
+position = Vector2(-3, 113)
+rotation = 1.56995
+shape = SubResource("10")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_freia")
+}
+autoplay = "Idle"
+
+[connection signal="body_entered" from="Body/PlayerSensor" to="." method="_on_PlayerSensor_body_entered"]
+[connection signal="body_exited" from="Body/PlayerSensor" to="." method="_on_PlayerSensor_body_exited"]

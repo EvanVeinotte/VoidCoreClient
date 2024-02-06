@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvuudmrq1iqt7"]
+
+[ext_resource type="Script" path="res://Objects/Scripts/Stools.gd" id="1_2fau8"]
+[ext_resource type="Texture2D" uid="uid://bpynyk1r40auj" path="res://Images/Woodstuffs/Stump.png" id="2_2iehr"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(103.755, 13.1316)
+
+[node name="Stools" type="Node2D"]
+script = ExtResource("1_2fau8")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+position = Vector2(0, -21)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_2iehr")
+centered = false
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Body"]
+position = Vector2(0, -37)
+
+[node name="southcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(95, 190)
+rotation = 0.464258
+shape = SubResource("1")
+
+[node name="eastcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(203, 192)
+rotation = -0.464258
+shape = SubResource("1")
+
+[node name="westcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(98, 138)
+rotation = -0.464258
+shape = SubResource("1")
+
+[node name="northcol" type="CollisionShape2D" parent="Body/StaticBody2D"]
+position = Vector2(204, 139)
+rotation = 0.464258
+shape = SubResource("1")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Area2D"]
+polygon = PackedVector2Array(86, 34, 147, 17, 212, 31, 276, 139, 152, 190, 42, 124)

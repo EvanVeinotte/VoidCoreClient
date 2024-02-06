@@ -1,0 +1,327 @@
+[gd_scene load_steps=17 format=3 uid="uid://dgic1fp6s3sid"]
+
+[ext_resource type="Theme" uid="uid://bts5qatdw76fe" path="res://Themes/MenuTheme.tres" id="1_53h55"]
+[ext_resource type="Script" path="res://Scripts/Menus/UploadDimensionMenu.gd" id="2_r2o5p"]
+[ext_resource type="Texture2D" uid="uid://dcon6757m7bqn" path="res://Images/MiniGames/xbutton/xbuttonnormal.png" id="3_engyv"]
+[ext_resource type="Texture2D" uid="uid://djyglqnandpm4" path="res://Images/MiniGames/xbutton/xbuttonpressed.png" id="4_xiste"]
+[ext_resource type="BitMap" uid="uid://ohohhxkaj76w" path="res://Images/MiniGames/xbutton/clickmask.png" id="5_gpamu"]
+[ext_resource type="Texture2D" uid="uid://ccmbqn050swjw" path="res://Images/Player/playerfallingspritesheet.png" id="6_34588"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ybrh"]
+bg_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjkv2"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 2
+border_color = Color(1, 1, 1, 1)
+shadow_size = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubr05"]
+font_size = 156
+
+[sub_resource type="LabelSettings" id="LabelSettings_odlj1"]
+font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrtut"]
+bg_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_r0tsb"]
+Button/styles/normal = SubResource("StyleBoxFlat_yrtut")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugxr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Animation" id="Animation_ac5aj"]
+resource_name = "Loading"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 4.71239, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_us32p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wi3mp"]
+_data = {
+"Loading": SubResource("Animation_ac5aj"),
+"RESET": SubResource("Animation_us32p")
+}
+
+[node name="UploadDimensionMenu" type="Control"]
+visibility_layer = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_53h55")
+script = ExtResource("2_r2o5p")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ybrh")
+
+[node name="Header" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -462.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjkv2")
+
+[node name="ExitButton" type="TextureButton" parent="Header"]
+texture_filter = 4
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -202.0
+offset_bottom = 202.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_engyv")
+texture_pressed = ExtResource("4_xiste")
+texture_click_mask = ExtResource("5_gpamu")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.5
+offset_top = 47.0
+offset_right = 324.5
+offset_bottom = 204.0
+grow_horizontal = 2
+text = "Upload Dimension"
+label_settings = SubResource("LabelSettings_ubr05")
+
+[node name="Subtitle" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -535.0
+offset_top = 227.0
+offset_right = 190.0
+offset_bottom = 428.0
+grow_horizontal = 2
+text = "Upload your world so that other players can see it in the Dimensions menu."
+label_settings = SubResource("LabelSettings_odlj1")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DimensionsButton" type="Button" parent="Header"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 214.0
+offset_top = 2.0
+offset_right = 531.0
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_r0tsb")
+theme_override_font_sizes/font_size = 64
+text = "Open
+Dimensions
+Menu"
+
+[node name="SatelliteValid" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -587.0
+offset_top = 20.0
+offset_right = 939.0
+offset_bottom = 113.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Dimension Satellite Position: [color=green]valid[/color]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="WorldNameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -393.0
+offset_right = -95.0
+offset_bottom = -300.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "World Name:"
+
+[node name="WorldNameInput" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -391.0
+offset_right = 513.0
+offset_bottom = -296.0
+grow_horizontal = 2
+grow_vertical = 2
+max_length = 32
+
+[node name="UsernameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -252.0
+offset_right = -95.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Username:"
+horizontal_alignment = 2
+
+[node name="UsernameInput" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -250.0
+offset_right = 513.0
+offset_bottom = -155.0
+grow_horizontal = 2
+grow_vertical = 2
+max_length = 32
+
+[node name="UploadButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -87.0
+offset_right = 137.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_sugxr")
+text = "Upload"
+
+[node name="LilClickMask" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -116.0
+offset_right = 170.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ClickMaskTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="LoadingSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(952, 506)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_34588")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_wi3mp")
+}
+autoplay = "Loading"
+speed_scale = 0.5
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 3.0
+
+[connection signal="pressed" from="Header/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="Header/DimensionsButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Header/DimensionsButton" to="." method="_on_dimensions_button_pressed"]
+[connection signal="mouse_entered" from="UploadButton" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="UploadButton" to="." method="_on_upload_button_pressed"]
+[connection signal="timeout" from="ClickMaskTimer" to="." method="_on_click_mask_timer_timeout"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

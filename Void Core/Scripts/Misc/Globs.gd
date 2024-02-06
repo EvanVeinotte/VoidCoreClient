@@ -16,8 +16,8 @@ const PLAYER_WALK_Z_OFFSET = 55
 const WIDTH_IT_SHOULD_BE = 1920
 const HEIGHT_IT_SHOULD_BE = 1080
 
-const CAMERA_ZOOM_MAX = 4
-const CAMERA_ZOOM_MIN = 0.5
+const CAMERA_ZOOM_MAX = 2
+const CAMERA_ZOOM_MIN = 0.4
 
 const COIN_STACK_LIMIT = 5
 const COIN_LYING_HEIGHT = 21
@@ -32,9 +32,17 @@ const SPEECH_BOX_SPEED = 2
 
 const PLAYER_FALL_SPEED = 20
 
+const IPANDPORT = "14.8.98.33:62241"
+const BASICFETCHURL = "/getdimensions"
+const POSTWORLDURL = "/postworld"
+
 var inworld = false
+var thisworldismine = false
 var newworld
+var currentworldfileaddress
 var worlddata
+var onlineuid
+var onlineworldname = ""
 
 var DEVICE_TYPE
 
