@@ -31,7 +31,9 @@ func setWalking(iswalking):
 			get_node("AnimationPlayer").play("GetUp")
 
 func _ready():
-	if(SettingsMenu.settingsdata.tutorialenabled):
+	if(!Globs.thisworldismine):
+		playingintroanimation = false
+	elif(SettingsMenu.settingsdata.tutorialenabled):
 		playingintroanimation = Globs.newworld
 	else:
 		playingintroanimation = false

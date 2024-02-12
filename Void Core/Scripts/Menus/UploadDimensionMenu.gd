@@ -3,8 +3,8 @@ extends Control
 var valid = false
 var validstring = "Dimension Satellite Position: [color=green]valid[/color]"
 var invalidstring = "Dimension Satellite Position: [color=red]invalid[/color]"
-var uploadsuccessstring = "Upload was successful!"
-var uploadfailstring = "Could not communicate with server."
+var uploadsuccessstring = "        Upload was successful!"
+var uploadfailstring = "  Could not communicate with server."
 @onready var httpreq = get_node("HTTPRequest")
 var thumbtopost = null
 var worldname = ""
@@ -97,7 +97,8 @@ func _on_click_mask_timer_timeout():
 
 func makePostRequest():
 	var updata = {"uid": MouseController.theworld.onlineuid, "worldname": worldname, 
-					"username": username, "date": date, "thumbnail": thumbtopost}
+					"username": username, "date": date, "thumbnail": thumbtopost,
+					"worlddata": FileHandler.loadWorldFromFile(Globs.currentworldfileaddress)}
 	
 	var body = JSON.stringify(updata)
 	var headers = ["Content-Type: application/json"]

@@ -135,12 +135,13 @@ func _say_Timer_Done():
 		sayLine()
 
 func sayLine():
-	if(SettingsMenu.settingsdata.tutorialenabled):
-		if(Globs.newworld):
-			speechbox.sayText(thescript[scriptpos], thescriptautoends[scriptpos])
-			if(scriptpos == 10):
-				triggers.WaitingToGetClose = true
-			if(scriptpos == 19):
-				triggers.PHASETWO = true
-			if(scriptpos == 27):
-				triggers.TutorialOver = true
+	if(Globs.thisworldismine):
+		if(SettingsMenu.settingsdata.tutorialenabled):
+			if(Globs.newworld):
+				speechbox.sayText(thescript[scriptpos], thescriptautoends[scriptpos])
+				if(scriptpos == 10):
+					triggers.WaitingToGetClose = true
+				if(scriptpos == 19):
+					triggers.PHASETWO = true
+				if(scriptpos == 27):
+					triggers.TutorialOver = true

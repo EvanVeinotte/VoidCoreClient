@@ -1,6 +1,7 @@
 {
 "player": {"position": {"x": 150, "y": 1300}},
-"firstlootarray": [00015, 00002],
+"scriptedloot": {"1": 00015, "2": 00002, "20": 00016},
+"voiditemcount": 0,
 "newworld": true,
 "onlineworldname": "",
 "themap":{"0":{"0":

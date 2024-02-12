@@ -10,6 +10,7 @@ var visiblechunkkeys = []
 var newworld
 var onlineuid
 var onlineworldname
+var voiditemcount
 
 func _ready():
 	#get_tree().get_root().set_canvas_cull_mask_bit(0, false)
@@ -21,9 +22,10 @@ func _ready():
 	MouseController.loadMainInstances()
 	themap = Globs.worlddata.themap
 	newworld = Globs.worlddata.newworld
-	LootTable.firstlootarray = Globs.worlddata.firstlootarray
+	LootTable.scriptedloot = Globs.worlddata.scriptedloot
 	onlineuid = Globs.onlineuid
 	onlineworldname = Globs.onlineworldname
+	voiditemcount = Globs.worlddata.voiditemcount
 	chunkloader.loadInMap(themap)
 
 func setValueToMap(cx, cy, z, y, x, value):

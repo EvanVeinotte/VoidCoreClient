@@ -17,6 +17,8 @@ extends Node
 @onready var voidcore = preload("res://Objects/Scenes/TheVoidCore.tscn")
 @onready var bronzegamemachine = preload("res://Objects/Scenes/BronzeGameMachine.tscn")
 @onready var dimensionsatellite = preload("res://Objects/Scenes/DimensionSatellite.tscn")
+@onready var tenthousandbasic = preload("res://Objects/Scenes/TenThousandBasic.tscn")
+@onready var twentythousandbasic = preload("res://Objects/Scenes/TwentyThousandBasic.tscn")
 ###
 
 @onready var objectbyid = [null,
@@ -36,4 +38,6 @@ extends Node
 					voidcore,
 					bronzegamemachine,
 					dimensionsatellite,
+					tenthousandbasic,
+					twentythousandbasic,
 				]

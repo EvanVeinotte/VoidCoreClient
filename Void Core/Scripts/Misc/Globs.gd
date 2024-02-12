@@ -35,6 +35,7 @@ const PLAYER_FALL_SPEED = 20
 const IPANDPORT = "14.8.98.33:62241"
 const BASICFETCHURL = "/getdimensions"
 const POSTWORLDURL = "/postworld"
+const WORLDGETURL = "/getworld"
 
 var inworld = false
 var thisworldismine = false

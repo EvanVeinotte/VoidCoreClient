@@ -31,11 +31,14 @@ func loadDataFromFile(address):
 	return {}
 
 func saveWorldToFile(myworld, worldaddress):
+	if(!Globs.thisworldismine):
+		return
 	var worldobject = {"player": {"position": {"x": myworld.player.position.x, "y": myworld.player.position.y}},
 						"newworld": false,
 						"onlineuid": myworld.onlineuid,
 						"onlineworldname": myworld.onlineworldname,
-						"firstlootarray": LootTable.firstlootarray,
+						"scriptedloot": LootTable.scriptedloot,
+						"voiditemcount": myworld.voiditemcount,
 						"themap": myworld.themap}
 	saveDataToFile(worldobject, worldaddress)
 	#ShowSaveLabel()
@@ -50,9 +53,7 @@ func checkIfWorldFileExists(worldaddress):
 			jsondata = jsonreader.data
 		file.close()
 		if(jsondata):
-			#checks to make sure it's a valid world file. Random property check here
-			if(jsondata.has("firstlootarray")):
-				return true
+			return true
 	return false
 
 func loadNewWorld(worldaddress):
@@ -99,7 +100,7 @@ func loadSettingsFromFile():
 	if(settingsdata):
 		return settingsdata
 	else:
-		var initsettingsdata = {"tutorialenabled": true, "mute": false, "fullscreen": true}
+		var initsettingsdata = {"tutorialenabled": true, "mute": false, "fullscreen": true, "master": 0, "sfx": 0, "music": -12, "onlineusername": ""}
 		saveSettingsToFile(initsettingsdata)
 		return initsettingsdata
 

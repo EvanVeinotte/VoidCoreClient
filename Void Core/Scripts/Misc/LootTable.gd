@@ -16,7 +16,9 @@ const listofobjectnameswithid ={
 	"Purple Flower Pot" : 13,
 	"Void Core" : 14,
 	"Bronze Game Machine" : 15,
-	"Dimension Satellite" : 16
+	"Dimension Satellite" : 16,
+	"Basic 10000 Statue" : 17,
+	"Basic 20000 Statue" : 18
 }
 
 const objswithspeciallootspawnstates = {
@@ -42,7 +44,7 @@ var basiclootpercentages = {
 
 var basiclootarray = []
 var customfirstlootarray = []
-var firstlootarray = []
+var scriptedloot = {}
 
 func _ready():
 	for i in basiclootpercentages.keys():
@@ -58,9 +60,18 @@ func getRandomLoot(lootclass):
 	if(customfirstlootarray):
 		var loottoreturn = customfirstlootarray.pop_front()
 		return loottoreturn
-	if(firstlootarray):
-		var loottoreturn = firstlootarray.pop_front()
-		return loottoreturn
+	if(scriptedloot):
+		#the keys are strings, but we have to turn them to ints
+		var scriptedkeys = scriptedloot.keys()
+		for i in range(len(scriptedkeys)):
+			scriptedkeys[i] = int(scriptedkeys[i])
+		scriptedkeys.sort()
+		for k in scriptedkeys:
+			if(k <= MouseController.theworld.voiditemcount + 1):
+				var loottoreturn = scriptedloot[str(k)]
+				scriptedloot.erase(str(k))
+				return loottoreturn
+
 	if(lootclass == "basic"):
 		randvalue = floor(randf() * len(basiclootarray))
 		return basiclootarray[randvalue]

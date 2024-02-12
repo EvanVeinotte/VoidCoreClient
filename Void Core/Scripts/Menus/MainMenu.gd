@@ -6,6 +6,7 @@ extends Control
 
 
 @onready var worldscene = load("res://Scenes/World/game_world.tscn")
+@onready var dimensionsmenu = load("res://Scenes/Menus/DimensionsMenu.tscn")
 
 var displaylabeltween
 
@@ -64,7 +65,8 @@ func _on_MultiplayerButton_pressed():
 
 func _on_DimensionsButton_pressed():
 	SoundHandler.playSFX("ButtonSound")
-	ShowComingSoonLabel()
+	var newdimensionsmenu = dimensionsmenu.instantiate()
+	get_tree().get_root().add_child(newdimensionsmenu)
 
 
 func _on_ExitGameButton_pressed():

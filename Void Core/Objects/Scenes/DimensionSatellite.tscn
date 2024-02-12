@@ -10,8 +10,8 @@ radius = 49.0
 height = 190.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_om4bk"]
-radius = 62.9975
-height = 235.993
+radius = 78.9991
+height = 286.005
 
 [node name="DimensionSatellite" type="Node2D"]
 script = ExtResource("1_74mqi")
@@ -63,5 +63,5 @@ position = Vector2(144, 155)
 rotation = 1.56995
 shape = SubResource("CapsuleShape2D_om4bk")
 
-[connection signal="body_entered" from="Body/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Body/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Body/PlayerSensor" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Body/PlayerSensor" to="." method="_on_area_2d_body_exited"]

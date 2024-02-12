@@ -71,13 +71,13 @@ func setInvalid():
 
 
 func _on_area_2d_body_entered(body):
-	if(body.get_name() == "Player"):
+	if(body.get_name() == "Player" and Globs.thisworldismine):
 		get_node("Body/Highlight").visible = true
 		MouseController.activeclickables.append(self)
 
 
 func _on_area_2d_body_exited(body):
-	if(body.get_name() == "Player"):
+	if(body.get_name() == "Player" and Globs.thisworldismine):
 		get_node("Body/Highlight").visible = false
 		MouseController.activeclickables.erase(self)
 

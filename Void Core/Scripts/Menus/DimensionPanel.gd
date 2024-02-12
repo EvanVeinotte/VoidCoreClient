@@ -1,5 +1,7 @@
 extends Control
 
+var dimensionmenu
+
 var uid
 var worldname
 var username
@@ -16,4 +18,5 @@ func _ready():
 		get_node("Panel/TextureRect").texture = ImageTexture.create_from_image(thumbnailimg)
 
 func _on_go_button_pressed():
-	pass # Replace with function body.
+	SoundHandler.playSFX("ButtonSound")
+	dimensionmenu.makeWorldRequest(uid)

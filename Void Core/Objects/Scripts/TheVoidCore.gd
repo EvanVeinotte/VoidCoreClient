@@ -94,6 +94,7 @@ func _process(delta):
 				var thisobjectid = Utils.getObjectValue(newlootdata, "object_id")
 				var thisobjectstate = Utils.getObjectValue(newlootdata, "object_state")
 				var thisobjectrotation = Utils.getObjectValue(newlootdata, "object_rotation")
+				theworld.voiditemcount += 1
 				theworld.instantiateNewObject(postoplace, thisobjectid, thisobjectstate, thisobjectrotation, true, [voidcenterpos, Vector2(newxpos, newypos)])
 			else:
 				print("no pos to place in")

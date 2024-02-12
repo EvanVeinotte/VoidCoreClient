@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c3g7s0r4abc4x" path="res://Images/MiniGames/Arrowbutton/arrowbuttonpressed.png" id="6_snjbl"]
 [ext_resource type="BitMap" uid="uid://bj7ldwaaq36fd" path="res://Images/MiniGames/Arrowbutton/clickmask.png" id="7_ptasd"]
 [ext_resource type="FontFile" uid="uid://cjlbqm5nqc440" path="res://Fonts/Kogo_font_v1-Regular.ttf" id="8_mpvwi"]
-[ext_resource type="PackedScene" uid="uid://dy1srsay8uo4n" path="res://Scenes/Menus/DimensionPanel.tscn" id="10_6d4ak"]
 [ext_resource type="Texture2D" uid="uid://ccmbqn050swjw" path="res://Images/Player/playerfallingspritesheet.png" id="11_bvbf1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdseo"]
@@ -76,6 +75,9 @@ _data = {
 "Loading": SubResource("Animation_r75mo"),
 "RESET": SubResource("Animation_w03ae")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g68gg"]
+bg_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
 
 [node name="DimensionsMenu" type="Control" node_paths=PackedStringArray("searchline", "clearbutt", "pagelabel", "incarrow", "decarrow", "panelholder", "loadingscreen")]
 layout_mode = 3
@@ -248,9 +250,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DimensionPanel" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("10_6d4ak")]
-layout_mode = 2
-
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 timeout = 5.0
 
@@ -291,9 +290,43 @@ libraries = {
 }
 autoplay = "Loading"
 
+[node name="LoadingScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="LoadingScreen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g68gg")
+
+[node name="Loading" type="Label" parent="LoadingScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -120.0
+offset_right = 347.0
+offset_bottom = -27.0
+grow_vertical = 0
+text = "Loading..."
+
+[node name="WorldLoadTimer" type="Timer" parent="LoadingScreen"]
+one_shot = true
+
+[node name="WorldGetHTTP" type="HTTPRequest" parent="."]
+
 [connection signal="pressed" from="VBoxContainer/Header/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Header/PageSelect/IncArrow" to="." method="_on_inc_arrow_pressed"]
 [connection signal="pressed" from="VBoxContainer/Header/PageSelect/DecArrow" to="." method="_on_dec_arrow_pressed"]
 [connection signal="text_submitted" from="VBoxContainer/Header/SearchBar/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="VBoxContainer/Header/SearchBar/ClearButton" to="." method="_on_clear_button_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="timeout" from="LoadingScreen/WorldLoadTimer" to="." method="_on_world_load_timer_timeout"]
+[connection signal="request_completed" from="WorldGetHTTP" to="." method="_on_world_get_http_request_completed"]

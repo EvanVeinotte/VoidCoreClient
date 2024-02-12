@@ -1,6 +1,6 @@
 extends Node
 
-var settingsdata = {"tutorialenabled": true, "mute": false, "fullscreen": false, "onlineusername": ""}
+var settingsdata = {"tutorialenabled": true, "mute": false, "fullscreen": false, "onlineusername": "", "master": 0, "sfx": 0, "music": -12}
 
 var menutohide
 
